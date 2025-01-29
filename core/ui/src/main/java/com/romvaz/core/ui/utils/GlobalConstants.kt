@@ -1,0 +1,17 @@
+package com.romvaz.core.ui.utils
+
+//DELAYS
+const val DELAY_TIME_5000 = 2000L
+const val DELAY_TIME_500 = 166L
+const val DELAY_TIME_300 = 100L
+
+//GENERAL
+const val SPLASH_ANIMATION_SIZE = 8
+
+//ANIMATIONS OFFSETS
+const val SLIDE_IN_OFFSET_START = 0
+const val SLIDE_IN_OFFSET_END = 1000
+
+//CARD SIZES
+const val SCREEN_HEIGHT_DIVIDER = 6
+const val SCREEN_WIDTH_DIVIDER = 2

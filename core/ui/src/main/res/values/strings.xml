@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- INTERNET CONNECTION -->
+    <string name="no_internet_connection">Sin conexión a internet</string>
+    <string name="no_internet_connection_disclaimer">Verifica tu señal o WiFi e \nintenta de nuevo.</string>
+    <string name="no_connection_in_splash_tittle">¿Sin conexión?</string>
+    <string name="no_connection_in_splash_message">Verifica tu conexion a internet e intenta de nuevo.</string>
+    <string name="lost_conection_snackbar_title">Has perdido conexón a internet</string>
+
+    <!-- BTN COPIES -->
+    <string name="btn_go_back">Regresar</string>
+    <string name="btn_open_settings">Abrir ajustes</string>
+    <string name="btn_accept">Aceptar</string>
+    <string name="btn_close_app">Cerrar</string>
+
+    <!-- ERRORS -->
+    <string name="error_service_tittle">Ups</string>
+    <string name="error_service_messsage">Parece que hay un error, intenta de nuevo mas tarde.</string>
+    <string name="error_bad_request">Parece que tenemos un \"Badrequest\" intentalo mas tarde</string>
+    <string name="error_unauthorized_request">Parece que no estas logeado, inicia sesion e intenta de nuevo</string>
+    <string name="error_forbidden_request">"Parece que estar intentando ingresar a un sitio restringido, intenta mas tarde "</string>
+    <string name="error_internal_request">Parece que tenemos un error de nuestro lado, intenta mas tarde</string>
+</resources>
