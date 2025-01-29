@@ -1,6 +1,6 @@
 package com.romvaz.core.domain.models.datastore
 
-import com.romvaz.core.domain.models.api.SendHelpPostModel
+import com.romvaz.core.domain.models.api.requests.SendHelpPostModel
 import kotlinx.serialization.Serializable
 import java.util.UUID
 

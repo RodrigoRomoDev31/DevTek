@@ -1,4 +1,4 @@
-package com.romvaz.core.domain.models.api
+package com.romvaz.core.domain.models.api.requests
 
 import kotlinx.serialization.SerialName
 

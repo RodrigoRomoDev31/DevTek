@@ -1,5 +1,6 @@
 package com.romvaz.core.data.implementation.location
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.location.Location
 import android.location.LocationManager
@@ -16,14 +17,14 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.launch
 
 class LocationClientImplementation(
-    private val context: Context,
+    context: Context,
     private val client: FusedLocationProviderClient
 ) : LocationClientService {
 
     private val locationManager =
         context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
-
+    @SuppressLint("MissingPermission")
     override fun getLocationUpdates(interval: Long): Flow<Location> =
         callbackFlow {
 

@@ -6,9 +6,11 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.os.IBinder
-import android.util.Log
 import androidx.core.app.NotificationCompat
+import com.romvaz.core.domain.api.weebhook.WebHookDataService
 import com.romvaz.core.domain.location.LocationClientService
+import com.romvaz.core.domain.models.api.requests.SendLocationPostModel
+import com.romvaz.core.ui.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -20,12 +22,15 @@ import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class LocationService() : Service() {
+class LocationService : Service() {
 
     private val serviceScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
     @Inject
     lateinit var locationClient: LocationClientService
+
+    @Inject
+    lateinit var webHookDataService: WebHookDataService
 
     override fun onBind(intent: Intent?): IBinder? = null
 
@@ -46,22 +51,32 @@ class LocationService() : Service() {
 
     private fun start() {
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
-            .setContentTitle("Tracking Location")
-            .setContentText("Waiting for location...")
+            .setContentTitle(applicationContext.getString(R.string.tracking_location))
+            .setContentText(applicationContext.getString(R.string.tracking_location_message))
             .setSmallIcon(android.R.drawable.ic_menu_mylocation)
             .setOngoing(true)
 
         val notificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
+        notificationManager.notify(NOTIFICATION_ID, notification.build())
+
         locationClient.getLocationUpdates(LOCATION_INTERVAL)
-            .catch { e -> e.printStackTrace() }
-            .onEach { location ->
-                Log.d("hola", location.toString())
-                val lat = location.latitude
-                val long = location.longitude
-                val updatedNotification = notification.setContentText("Location: ($lat, $long)")
+            .catch { e ->
+                e.printStackTrace()
+                val updatedNotification =
+                    notification.setContentText(applicationContext.getString(R.string.problems_with_location))
                 notificationManager.notify(NOTIFICATION_ID, updatedNotification.build())
+            }
+            .onEach { location ->
+                webHookDataService.sendLocation(
+                    SendLocationPostModel(
+                        latitude = location.latitude,
+                        longitude = location.longitude,
+                        timeStamp = location.time,
+                        accuracy = location.accuracy,
+                    )
+                )
             }
             .launchIn(serviceScope)
 
@@ -98,4 +113,4 @@ class LocationService() : Service() {
     }
 }
 
-const val LOCATION_INTERVAL = 1000L
+const val LOCATION_INTERVAL = 10000L
