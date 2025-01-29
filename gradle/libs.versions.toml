@@ -46,6 +46,11 @@ detekt = "1.23.5"
 # Performance
 tracingPerfettoHandshake = "1.0.0"
 
+#DataStore
+datastore = "1.1.1"
+kotlinSerialization = "2.0.20"
+kotlinxSerializationJson = "1.6.3"
+
 [libraries]
 # General
 android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
@@ -98,6 +103,11 @@ lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "
 
 # Performance
 androidx-tracing-perfetto-handshake = { group = "androidx.tracing", name = "tracing-perfetto-handshake", version.ref = "tracingPerfettoHandshake" }
+
+#DataStore
+androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "datastore" }
+kotlin-serialization = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlinSerialization" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 
 [bundles]
 androidx-test = ["androidx-junit", "androidx-espresso-core"]

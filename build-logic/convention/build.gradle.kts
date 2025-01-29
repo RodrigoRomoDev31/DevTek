@@ -62,5 +62,9 @@ gradlePlugin {
             id = "arch.android.test"
             implementationClass = "AndroidTestArchPlugin"
         }
+        register("androidDatastoreArch") {
+            id = "arch.android.datastore"
+            implementationClass = "AndroidDatastoreArchPlugin"
+        }
     }
 }
