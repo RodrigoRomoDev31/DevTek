@@ -15,6 +15,7 @@ import com.romvaz.core.ui.navigation.NavigatorHandler
 import com.romvaz.core.ui.theme.DevTekTheme
 import com.romvaz.feature.home.homeGraph
 import com.romvaz.feature.login.loginGraph
+import com.romvaz.feature.user.userGraph
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -40,6 +41,7 @@ class MainActivity : ComponentActivity() {
                     ) {
                         loginGraph()
                         homeGraph()
+                        userGraph()
                     }
                 }
                 NavigatorHandler(navigator = navigator, navController = navController)

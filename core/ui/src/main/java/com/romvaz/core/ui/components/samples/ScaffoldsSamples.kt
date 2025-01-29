@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -19,7 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.romvaz.core.ui.components.DevTekHeader
 import com.romvaz.core.ui.components.DevTekScaffold
-import com.romvaz.core.ui.components.DevTekTransparentHeader
 import com.romvaz.core.ui.theme.DevTekTheme
 import com.romvaz.core.ui.theme.TypographyExtensions.h2
 import com.romvaz.core.ui.theme.devTekColors
@@ -70,29 +68,3 @@ private fun ScaffoldPreview() {
         }
     }
 }
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Preview
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-private fun ScaffoldTransparentHeaderPreview() {
-    DevTekTheme {
-        DevTekScaffold(
-            header = {
-                DevTekTransparentHeader(
-                    icon = Icons.Filled.FavoriteBorder,
-                    iconTint = MaterialTheme.colorScheme.onSurface
-                )
-            }
-        ) { paddings ->
-            Box(
-                modifier = Modifier
-                    .padding(paddings)
-                    .fillMaxSize(), contentAlignment = Alignment.Center
-            ) {
-                Text(text = "Scaffold Preview", color = MaterialTheme.colorScheme.onSurface)
-            }
-        }
-    }
-}
-
