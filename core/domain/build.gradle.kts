@@ -1,5 +1,6 @@
 plugins {
     id("arch.android.library")
+    id("org.jetbrains.kotlin.plugin.serialization")
 }
 
 android {
@@ -13,6 +14,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.kotlinx.serialization.json)
     implementation(libs.okhttp)
     implementation(libs.converter.gson)
     implementation(libs.retrofit) {

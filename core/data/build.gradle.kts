@@ -16,6 +16,7 @@ android {
 dependencies {
     implementation(project(":core:domain"))
     implementation(project(":core:network"))
+    implementation(project(":core:data:datastore"))
 
     implementation(libs.retrofit) {
         exclude("module", "okhttp")
