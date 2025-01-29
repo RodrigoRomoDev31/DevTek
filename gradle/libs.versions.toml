@@ -51,6 +51,12 @@ datastore = "1.1.1"
 kotlinSerialization = "2.0.20"
 kotlinxSerializationJson = "1.6.3"
 
+#Location
+playServicesLocation = "21.3.0"
+
+#Permissions
+acompanist = "0.30.1"
+
 [libraries]
 # General
 android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
@@ -108,6 +114,12 @@ androidx-tracing-perfetto-handshake = { group = "androidx.tracing", name = "trac
 androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "datastore" }
 kotlin-serialization = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlinSerialization" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+
+#Location
+play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
+
+#Permissions
+acompanist-permissions = { group = "com.google.accompanist", name = "accompanist-permissions", version.ref = "acompanist" }
 
 [bundles]
 androidx-test = ["androidx-junit", "androidx-espresso-core"]

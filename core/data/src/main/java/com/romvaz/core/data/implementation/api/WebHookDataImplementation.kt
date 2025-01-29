@@ -1,4 +1,4 @@
-package com.romvaz.core.data.implementation
+package com.romvaz.core.data.implementation.api
 
 import com.romvaz.core.domain.api.WebHookApi
 import com.romvaz.core.domain.api.weebhook.WebHookDataService

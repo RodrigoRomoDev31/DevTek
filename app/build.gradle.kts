@@ -32,4 +32,6 @@ dependencies {
     implementation(project(":feature:home"))
     implementation(project(":feature:login"))
     implementation(project(":feature:user"))
+
+    implementation(libs.acompanist.permissions)
 }

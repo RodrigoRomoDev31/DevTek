@@ -18,6 +18,7 @@ dependencies {
     implementation(project(":core:network"))
     implementation(project(":core:data:datastore"))
 
+    implementation(libs.play.services.location)
     implementation(libs.retrofit) {
         exclude("module", "okhttp")
     }

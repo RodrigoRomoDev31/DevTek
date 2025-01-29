@@ -1,12 +1,17 @@
 package com.romvaz.core.data
 
-import com.romvaz.core.data.implementation.WebHookDataImplementation
+import android.content.Context
+import com.google.android.gms.location.LocationServices
+import com.romvaz.core.data.implementation.api.WebHookDataImplementation
+import com.romvaz.core.data.implementation.location.LocationClientImplementation
 import com.romvaz.core.domain.api.WebHookApi
 import com.romvaz.core.domain.api.weebhook.WebHookDataService
+import com.romvaz.core.domain.location.LocationClientService
 import com.romvaz.datastore.DataStoreModule
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -24,5 +29,15 @@ class DataModule {
         webHookApi: WebHookApi
     ): WebHookDataService =
         WebHookDataImplementation(webHookApi)
+
+    @Provides
+    @Singleton
+    fun providesLocationClientService(
+        @ApplicationContext context: Context
+    ): LocationClientService =
+        LocationClientImplementation(
+            context,
+            LocationServices.getFusedLocationProviderClient(context)
+        )
 }
 
