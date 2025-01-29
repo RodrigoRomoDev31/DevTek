@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.dataStore
 import com.romvaz.core.domain.models.HardUserPreferenceModel
-import com.romvaz.datastore.implementations.AppPreferencesImplementation
-import com.romvaz.datastore.services.AppPreferenceService
+import com.romvaz.datastore.implementations.UserPreferencesImplementation
+import com.romvaz.datastore.services.UserPreferenceService
 import com.romvaz.datastore.utils.AppPreferencesSerializer
 import dagger.Module
 import dagger.Provides
@@ -30,8 +30,8 @@ class DataStoreModule {
     @Singleton
     fun providesPreferenceService(
         dataStore: DataStore<HardUserPreferenceModel>
-    ): AppPreferenceService =
-        AppPreferencesImplementation(dataStore)
+    ): UserPreferenceService =
+        UserPreferencesImplementation(dataStore)
 }
 
 private val Context.appPreferencesDataStore: DataStore<HardUserPreferenceModel> by dataStore(

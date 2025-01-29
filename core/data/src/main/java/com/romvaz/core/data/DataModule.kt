@@ -11,6 +11,4 @@ import dagger.hilt.components.SingletonComponent
     ]
 )
 @InstallIn(SingletonComponent::class)
-class DataModule {
-
-}
+class DataModule

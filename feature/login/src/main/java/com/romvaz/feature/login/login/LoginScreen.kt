@@ -13,28 +13,33 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.romvaz.core.network.connectivity.InternetStatus
 import com.romvaz.core.ui.R
 import com.romvaz.core.ui.components.ButtonComponent
 import com.romvaz.core.ui.components.DevTekScaffold
 import com.romvaz.core.ui.components.LoadingComponent
 import com.romvaz.core.ui.components.SnackBarTopComponent
 import com.romvaz.core.ui.components.SnackBarTopStatus
+import com.romvaz.core.ui.components.SnackBarVisuals
 import com.romvaz.core.ui.components.VerticalSpacer
 import com.romvaz.core.ui.theme.Spacings
 import com.romvaz.core.ui.theme.TypographyExtensions.h3
 import com.romvaz.core.ui.theme.devTekColors
 import com.romvaz.core.ui.theme.isDarkTheme
+import com.romvaz.core.ui.utils.GlobalUtils
 import com.romvaz.feature.login.components.InputFieldsComponent
 
 @Composable
@@ -47,9 +52,8 @@ fun LoginScreen(
         emailState = state.emailInput,
         passwordState = state.password,
         loadingState = state.loading,
-        snackBarTopStatusState = state.snackBarTopStatus,
-        counterState = state.counter,
         btnEnableState = state.btnEnable,
+        internetState = state.internetStatus,
         updateEmail = { viewModel.updateEmail(it) },
         updatePassword = { viewModel.updatePassword(it) },
         loginHardUser = viewModel::loginUser
@@ -61,15 +65,37 @@ private fun Content(
     emailState: String,
     passwordState: String,
     loadingState: Boolean,
-    snackBarTopStatusState: SnackBarTopStatus,
     btnEnableState: Boolean,
-    counterState: Int,
+    internetState: InternetStatus,
     updateEmail: (String) -> Unit,
     updatePassword: (String) -> Unit,
     loginHardUser: () -> Unit
 ) {
 
     val snackBarHostState = remember { SnackbarHostState() }
+    val context = LocalContext.current
+
+    LaunchedEffect(key1 = internetState) {
+        when (internetState) {
+            InternetStatus.UNAVAILABLE_CONNECTION ->
+                snackBarHostState.showSnackbar(
+                    SnackBarVisuals(
+                        message = context.getString(R.string.no_internet_connection),
+                        withDismissAction = false
+                    )
+                )
+
+            InternetStatus.LOST_CONNECTION ->
+                snackBarHostState.showSnackbar(
+                    SnackBarVisuals(
+                        message = context.getString(R.string.lost_conection_snackbar_title),
+                        withDismissAction = false
+                    )
+                )
+
+            else -> {}
+        }
+    }
 
     if (loadingState)
         LoadingComponent()
@@ -80,8 +106,9 @@ private fun Content(
         snackbarHost = {
             SnackBarTopComponent(
                 hostState = snackBarHostState,
-                snackBarTopStatus = snackBarTopStatusState,
-                onClickAction = { snackBarHostState.currentSnackbarData?.dismiss() }
+                snackBarTopStatus = SnackBarTopStatus.INTERNET,
+                onClickAction = { snackBarHostState.currentSnackbarData?.dismiss() },
+                infoClickAction = { GlobalUtils.goToSettings(context) }
             )
         }) {
         Box(

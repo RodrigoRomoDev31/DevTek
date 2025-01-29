@@ -2,7 +2,7 @@ package com.romvaz.feature.login.login.middlewares
 
 import com.romvaz.core.domain.models.HardUserPreferenceModel
 import com.romvaz.core.store.ActionSideEffect
-import com.romvaz.datastore.services.AppPreferenceService
+import com.romvaz.datastore.services.UserPreferenceService
 import com.romvaz.feature.login.login.LoginScreenAction
 import com.romvaz.feature.login.login.LoginScreenStateUi
 import kotlinx.coroutines.flow.Flow
@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class LoginMiddleware @Inject constructor(
-    private val appPreferenceService: AppPreferenceService
+    private val appPreferenceService: UserPreferenceService
 ) : ActionSideEffect<LoginScreenStateUi, LoginScreenAction>() {
 
     override fun observe(

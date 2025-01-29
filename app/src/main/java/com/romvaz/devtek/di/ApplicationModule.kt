@@ -2,6 +2,7 @@ package com.romvaz.devtek.di
 
 import android.content.Context
 import com.romvaz.core.data.DataModule
+import com.romvaz.core.network.NetworkModule
 import com.romvaz.core.ui.navigation.ComposeNavigator
 import com.romvaz.core.ui.navigation.Navigator
 import com.romvaz.devtek.DevTekApplication
@@ -14,7 +15,8 @@ import javax.inject.Singleton
 
 @Module(
     includes = [
-        DataModule::class
+        DataModule::class,
+        NetworkModule::class
     ]
 )
 @InstallIn(SingletonComponent::class)

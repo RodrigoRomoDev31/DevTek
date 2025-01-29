@@ -8,6 +8,7 @@ import com.romvaz.core.domain.routes.LoginRoute
 import com.romvaz.core.ui.navigation.NavigationCommand
 import com.romvaz.core.ui.navigation.Navigator
 import com.romvaz.core.ui.utils.DELAY_TIME_2000
+import com.romvaz.datastore.services.UserPreferenceService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -15,17 +16,27 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SplashScreenViewModel @Inject constructor(
-    private val navigator: Navigator
+    private val navigator: Navigator,
+    private val userPreferenceService: UserPreferenceService
 ) : ViewModel() {
     init {
         viewModelScope.launch {
-            delay(DELAY_TIME_2000)
-            navigator.navigate(
-                NavigationCommand.NavigateTo(
-                    LoginRoute.UserLoginRoute.route,
-                    NavOptions.Builder().setPopUpTo(HomeRoute.SplashRoute.route, true).build()
-                )
-            )
+            userPreferenceService.getPreferences().collect { userInfo ->
+                delay(DELAY_TIME_2000)
+                if (userInfo.email.isEmpty())
+                    navigateTo(LoginRoute.UserLoginRoute.route)
+                else
+                    navigateTo(HomeRoute.MainRoute.route)
+            }
         }
     }
+
+    private fun navigateTo(route: String) =
+        navigator.navigate(
+            NavigationCommand.NavigateTo(
+                route,
+                NavOptions.Builder().setPopUpTo(HomeRoute.SplashRoute.route, true)
+                    .build()
+            )
+        )
 }
