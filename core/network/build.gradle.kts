@@ -11,7 +11,7 @@ android {
     }
 
     defaultConfig {
-        buildConfigField("String", "API_BASE_URL", "\"https://www.freetogame.com/api/\"")
+        buildConfigField("String", "API_BASE_URL", "\"https://webhook-test.com/\"")
     }
 
     buildTypes {

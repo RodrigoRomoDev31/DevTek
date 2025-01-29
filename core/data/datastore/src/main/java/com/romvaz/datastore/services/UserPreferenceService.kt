@@ -1,6 +1,6 @@
 package com.romvaz.datastore.services
 
-import com.romvaz.core.domain.models.HardUserPreferenceModel
+import com.romvaz.core.domain.models.datastore.HardUserPreferenceModel
 import kotlinx.coroutines.flow.Flow
 
 interface UserPreferenceService {

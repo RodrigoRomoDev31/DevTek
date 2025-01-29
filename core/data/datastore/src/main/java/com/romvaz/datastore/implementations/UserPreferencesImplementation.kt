@@ -1,7 +1,7 @@
 package com.romvaz.datastore.implementations
 
 import androidx.datastore.core.DataStore
-import com.romvaz.core.domain.models.HardUserPreferenceModel
+import com.romvaz.core.domain.models.datastore.HardUserPreferenceModel
 import com.romvaz.datastore.services.UserPreferenceService
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers

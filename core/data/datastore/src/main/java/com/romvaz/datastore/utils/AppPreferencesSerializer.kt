@@ -3,7 +3,7 @@ package com.romvaz.datastore.utils
 import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.datastore.core.Serializer
-import com.romvaz.core.domain.models.HardUserPreferenceModel
+import com.romvaz.core.domain.models.datastore.HardUserPreferenceModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.SerializationException

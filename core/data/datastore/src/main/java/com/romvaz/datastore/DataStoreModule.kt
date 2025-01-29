@@ -3,7 +3,7 @@ package com.romvaz.datastore
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.dataStore
-import com.romvaz.core.domain.models.HardUserPreferenceModel
+import com.romvaz.core.domain.models.datastore.HardUserPreferenceModel
 import com.romvaz.datastore.implementations.UserPreferencesImplementation
 import com.romvaz.datastore.services.UserPreferenceService
 import com.romvaz.datastore.utils.AppPreferencesSerializer

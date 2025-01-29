@@ -1,6 +1,6 @@
 package com.romvaz.feature.login.login.middlewares
 
-import com.romvaz.core.domain.models.HardUserPreferenceModel
+import com.romvaz.core.domain.models.datastore.HardUserPreferenceModel
 import com.romvaz.core.store.ActionSideEffect
 import com.romvaz.datastore.services.UserPreferenceService
 import com.romvaz.feature.login.login.LoginScreenAction

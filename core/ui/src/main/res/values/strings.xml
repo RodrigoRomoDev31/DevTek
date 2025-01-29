@@ -38,4 +38,8 @@
     <string name="truck_model">Modelo de Camion</string>
     <string name="truck_id">Id de Camion</string>
     <string name="truck_plate">Placa de Camion</string>
+
+    <!-- SEND HELP STATUS -->
+    <string name="send_help_alert_success">Se ha notificado su peticion SOS</string>
+    <string name="send_help_alert_failure">No se ha podido mandar su peticion SOS. Intente de nuevo</string>
 </resources>

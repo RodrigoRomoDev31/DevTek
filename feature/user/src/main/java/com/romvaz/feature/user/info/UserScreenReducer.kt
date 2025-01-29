@@ -1,6 +1,6 @@
 package com.romvaz.feature.user.info
 
-import com.romvaz.core.domain.models.HardUserPreferenceModel
+import com.romvaz.core.domain.models.datastore.HardUserPreferenceModel
 import com.romvaz.core.store.Reducer
 
 class UserScreenReducer : Reducer<UserScreenUiState, UserScreenAction> {

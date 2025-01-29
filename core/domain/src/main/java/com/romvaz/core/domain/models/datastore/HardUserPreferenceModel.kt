@@ -1,5 +1,6 @@
-package com.romvaz.core.domain.models
+package com.romvaz.core.domain.models.datastore
 
+import com.romvaz.core.domain.models.api.SendHelpPostModel
 import kotlinx.serialization.Serializable
 import java.util.UUID
 
@@ -13,3 +14,11 @@ data class HardUserPreferenceModel(
     val truckModel: String = "BM000558",
     val truckId: String = UUID.randomUUID().toString()
 )
+
+fun HardUserPreferenceModel.createPostModel(): SendHelpPostModel =
+    SendHelpPostModel(
+        operatorName = this.name,
+        operatorId = this.conductorId,
+        operatorPhone = this.phoneNumber,
+        operatorTruckId = this.truckId
+    )
