@@ -8,6 +8,8 @@ class LoginScreenReducer : Reducer<LoginScreenStateUi, LoginScreenAction> {
         when (action) {
             is LoginScreenAction.OnEmailChange -> state.onEmailChange(action)
             is LoginScreenAction.OnPasswordChange -> state.copy(password = action.password)
+            is LoginScreenAction.LoginHardUser -> state.copy(loading = true)
+            else -> state
         }
 
     private fun LoginScreenStateUi.onEmailChange(
@@ -28,4 +30,7 @@ sealed interface LoginScreenAction {
     data class OnPasswordChange(
         val password: String
     ) : LoginScreenAction
+
+    data object LoginHardUser : LoginScreenAction
+    data object OnHardLogin : LoginScreenAction
 }

@@ -1,9 +1,9 @@
 package com.romvaz.core.ui.utils
 
 //DELAYS
-const val DELAY_TIME_5000 = 2000L
-const val DELAY_TIME_500 = 166L
-const val DELAY_TIME_300 = 100L
+const val DELAY_TIME_2000 = 2000L
+const val DELAY_TIME_166 = 166L
+const val DELAY_TIME_100 = 100L
 
 //GENERAL
 const val SPLASH_ANIMATION_SIZE = 8

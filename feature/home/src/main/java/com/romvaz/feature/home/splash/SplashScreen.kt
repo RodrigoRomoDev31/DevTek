@@ -33,8 +33,8 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.romvaz.core.ui.R
 import com.romvaz.core.ui.theme.Spacings
 import com.romvaz.core.ui.theme.devTekColors
-import com.romvaz.core.ui.utils.DELAY_TIME_300
-import com.romvaz.core.ui.utils.DELAY_TIME_500
+import com.romvaz.core.ui.utils.DELAY_TIME_100
+import com.romvaz.core.ui.utils.DELAY_TIME_166
 import com.romvaz.core.ui.utils.SLIDE_IN_OFFSET_END
 import com.romvaz.core.ui.utils.SLIDE_IN_OFFSET_START
 import com.romvaz.core.ui.utils.SPLASH_ANIMATION_SIZE
@@ -53,7 +53,7 @@ fun SplashScreen(
     LaunchedEffect(showAnimation) {
         if (showAnimation) {
             for (index in numberOfAnimations.indices) {
-                delay(DELAY_TIME_300)
+                delay(DELAY_TIME_100)
                 currentAnimationIndex = index
             }
         }
@@ -61,7 +61,7 @@ fun SplashScreen(
 
     LaunchedEffect(key1 = showAnimation) {
         if (!showAnimation) {
-            delay(DELAY_TIME_500)
+            delay(DELAY_TIME_166)
             showAnimation = true
         }
     }

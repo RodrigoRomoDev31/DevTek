@@ -18,6 +18,7 @@ class AndroidFeatureArchPlugin : Plugin<Project> {
                 implementation(project(":core:domain"))
                 implementation(project(":core:store"))
                 implementation(project(":core:network"))
+                implementation(project(":core:data:datastore"))
             }
         }
     }

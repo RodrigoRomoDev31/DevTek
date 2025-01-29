@@ -52,6 +52,7 @@ fun LoginScreen(
         btnEnableState = state.btnEnable,
         updateEmail = { viewModel.updateEmail(it) },
         updatePassword = { viewModel.updatePassword(it) },
+        loginHardUser = viewModel::loginUser
     )
 }
 
@@ -65,6 +66,7 @@ private fun Content(
     counterState: Int,
     updateEmail: (String) -> Unit,
     updatePassword: (String) -> Unit,
+    loginHardUser: () -> Unit
 ) {
 
     val snackBarHostState = remember { SnackbarHostState() }
@@ -130,7 +132,9 @@ private fun Content(
                 VerticalSpacer(height = Spacings.fourteen)
 
                 ButtonComponent(
-                    onClick = {},
+                    onClick = {
+                        loginHardUser()
+                    },
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = Spacings.six),
