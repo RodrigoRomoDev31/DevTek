@@ -20,4 +20,12 @@
     <string name="error_unauthorized_request">Parece que no estas logeado, inicia sesion e intenta de nuevo</string>
     <string name="error_forbidden_request">"Parece que estar intentando ingresar a un sitio restringido, intenta mas tarde "</string>
     <string name="error_internal_request">Parece que tenemos un error de nuestro lado, intenta mas tarde</string>
+
+    <!-- ACCOUNT -->
+    <string name="login">Inicia sesión</string>
+    <string name="login_action">Iniciar sesión</string>
+    <string name="email">Correo electrónico</string>
+    <string name="email_placeholder">hola@email.com</string>
+    <string name="password">Contraseña</string>
+    <string name="error_in_login">Hubo un error, verifica tus datos e intenta de nuevo.</string>
 </resources>

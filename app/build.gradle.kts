@@ -30,4 +30,5 @@ dependencies {
     implementation(project(":core:domain"))
     implementation(project(":core:network"))
     implementation(project(":feature:home"))
+    implementation(project(":feature:login"))
 }

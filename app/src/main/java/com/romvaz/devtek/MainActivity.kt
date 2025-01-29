@@ -14,6 +14,7 @@ import com.romvaz.core.ui.navigation.Navigator
 import com.romvaz.core.ui.navigation.NavigatorHandler
 import com.romvaz.core.ui.theme.DevTekTheme
 import com.romvaz.feature.home.homeGraph
+import com.romvaz.feature.login.loginGraph
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -37,6 +38,7 @@ class MainActivity : ComponentActivity() {
                         startDestination = HomeRoute.RootRoute.route,
                         modifier = Modifier.weight(1.0f)
                     ) {
+                        loginGraph()
                         homeGraph()
                     }
                 }

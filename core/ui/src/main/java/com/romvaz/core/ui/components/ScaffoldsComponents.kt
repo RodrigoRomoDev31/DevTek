@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun DevTekScaffold(
     modifier: Modifier = Modifier,
+    containerColor: Color = MaterialTheme.colorScheme.surface,
     header: @Composable () -> Unit = {},
     bottomBar: @Composable () -> Unit = {},
     snackbarHost: @Composable () -> Unit = {},
@@ -33,7 +34,7 @@ fun DevTekScaffold(
         modifier = modifier,
         topBar = header,
         snackbarHost = snackbarHost,
-        containerColor = MaterialTheme.colorScheme.surface,
+        containerColor = containerColor,
         bottomBar = bottomBar,
         content = content,
     )
