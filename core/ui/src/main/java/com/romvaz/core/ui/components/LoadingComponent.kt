@@ -11,6 +11,7 @@ import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.romvaz.core.ui.R
 
+
 @Composable
 fun LoadingComponent(
     scale: Float = 1f

@@ -37,6 +37,16 @@ import com.romvaz.core.ui.theme.TypographyExtensions.captions
 import com.romvaz.core.ui.theme.devTekColors
 import com.romvaz.core.ui.theme.isDarkTheme
 
+/**
+ * @param value The current text value displayed in the field.
+ * @param onValueChange A lambda function that is triggered when the text value changes.
+ * It receives the new text value as a parameter.
+ * @param placeholder The placeholder text to be displayed when the field is empty.
+ * @param singleLine A flag indicating whether the text field should be limited to a single line. Default is `true`.
+ * @param lastField A flag indicating whether this is the last field in a form, affecting layout behavior.
+ * @param isPassword A flag indicating whether the field is for password input, hiding the text with asterisks.
+ * Default is `false`.
+ */
 @Composable
 fun InputComponent(
     value: String,
@@ -62,6 +72,7 @@ fun InputComponent(
             .focusRequester(focusRequester)
             .focusable(false),
         visualTransformation =
+        // Transform input if its password and visibility is true or false
         if (passwordVisible && isPassword) VisualTransformation.None
         else if (!isPassword) VisualTransformation.None
         else PasswordVisualTransformation(),
@@ -77,6 +88,7 @@ fun InputComponent(
             )
         },
         trailingIcon = {
+            // SHOW ICON TO INMASCade content in input
             if (isPassword) {
                 val image = if (passwordVisible)
                     painterResource(id = R.drawable.ic_invisible)
@@ -84,6 +96,7 @@ fun InputComponent(
 
                 val description = if (passwordVisible) "Hide password" else "Show password"
 
+                // Update Password visibility
                 IconButton(
                     onClick = { passwordVisible = !passwordVisible },
                     modifier = Modifier.padding(end = Spacings.two)
@@ -106,6 +119,7 @@ fun InputComponent(
     )
 }
 
+// CONFIGURE COLORS DEPENDING IF IS DARK THEME
 @Composable
 private fun getColors(): TextFieldColors =
     TextFieldDefaults.colors(
@@ -130,9 +144,3 @@ private fun getColors(): TextFieldColors =
             MaterialTheme.devTekColors.Gray60
         }
     )
-
-
-const val REGEX_EMAIL = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\$"
-const val REGEX_PASSWORD = "^(?=.*\\d)(?=.*[a-zA-Z])(?=.*[@#\$%^&+=!]).{8,}\$"
-fun String.validateMail() = Regex(REGEX_EMAIL).matches(this)
-fun String.validatePassword() = Regex(REGEX_PASSWORD).matches(this)

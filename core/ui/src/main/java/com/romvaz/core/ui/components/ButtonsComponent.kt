@@ -2,9 +2,7 @@ package com.romvaz.core.ui.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
@@ -23,19 +21,32 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.romvaz.core.ui.theme.Spacings
 import com.romvaz.core.ui.theme.TypographyExtensions.h5
 import com.romvaz.core.ui.theme.TypographyExtensions.utility
 import com.romvaz.core.ui.theme.devTekColors
 import com.romvaz.core.ui.theme.isDarkTheme
 import kotlinx.coroutines.delay
 
+// BUTTON Component - must use always in case of need of button
+/**
+ * @param onClick The lambda function to execute when the button is clicked.
+ * @param modifier Modifier to be applied to the button's layout. Default is `Modifier`.
+ * @param style The style of the button, typically indicating its visual design.
+ * @param size The size of the button.
+ * @param enabled A flag to enable or disable the button. If `false`, the button cannot be clicked. Default is `true`.
+ * @param debounceLength The amount of time (in milliseconds) to delay subsequent clicks. Default
+ * is `1000` ms (1 second).
+ * @param elevation The elevation (shadow) of the button. You can customize the shadow using.
+ * @param contentPadding The padding values to apply around the button's content. Default is
+ * `ButtonDefaults.ContentPadding`.
+ * @param text The composable content to be displayed inside the button (e.g., button label).
+ * This is a required parameter.
+ */
 @Suppress("LongParameterList")
 @Composable
 fun ButtonComponent(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    icon: @Composable (() -> Unit)? = null,
     style: ButtonStyle = ButtonStyle.Primary,
     size: ButtonSize = ButtonSize.Medium,
     enabled: Boolean = true,
@@ -67,10 +78,6 @@ fun ButtonComponent(
         ProvideTextStyle(value = size.getTextStyle()) {
             text()
         }
-        icon?.let {
-            Spacer(modifier.padding(horizontal = Spacings.two))
-            icon()
-        }
     }
 
     LaunchedEffect(allowClicks) {
@@ -82,26 +89,33 @@ fun ButtonComponent(
 
 }
 
+// BUTTON SIZES
+// IF NEEDED, ADD Button SIZE and configure attributes
 enum class ButtonSize {
     Small, Medium
 }
 
+// BUTTON STYLES
+// IF NEEDED, ADD Button style and configure attributes
 enum class ButtonStyle {
     Primary, Secondary, Alternative, Tertiary
 }
 
+//BUTTON SHAPE CONFIGURATION By BUTTON SIZE
 @Composable
 private fun ButtonSize.getShape(): Shape = when (this) {
     ButtonSize.Small -> MaterialTheme.shapes.small
     ButtonSize.Medium -> MaterialTheme.shapes.large
 }
 
+//BUTTON HEIGHT CONFIGURATION By BUTTON SIZE
 @Composable
 private fun ButtonSize.getHeight(): Dp = when (this) {
     ButtonSize.Small -> 30.dp
     ButtonSize.Medium -> 56.dp
 }
 
+//COLOR CONFIGURATION By BUTTON TYPE
 @Composable
 private fun ButtonStyle.getColors(): ButtonColors = when (this) {
     ButtonStyle.Primary -> ButtonDefaults.buttonColors(
@@ -139,6 +153,7 @@ private fun ButtonStyle.getColors(): ButtonColors = when (this) {
     )
 }
 
+//BORDER CONFIGURATION BT BUTTON TYPE
 @Composable
 private fun ButtonStyle.getBorder(): BorderStroke? = when (this) {
     ButtonStyle.Primary -> null
@@ -148,6 +163,7 @@ private fun ButtonStyle.getBorder(): BorderStroke? = when (this) {
     ButtonStyle.Tertiary -> null
 }
 
+// TEXT SIZES FOR BUTTONSIZE
 @Composable
 private fun ButtonSize.getTextStyle(): TextStyle = when (this) {
     ButtonSize.Small -> MaterialTheme.typography.utility

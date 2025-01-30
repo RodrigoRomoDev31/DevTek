@@ -32,6 +32,8 @@ import com.romvaz.core.ui.theme.TypographyExtensions.h2
 import com.romvaz.core.ui.theme.isDarkTheme
 import com.romvaz.core.ui.utils.GlobalUtils
 
+//COMPONENT TO SHOW PROBLEMS THAT CAN AFFECT BEHAVIOR IN APP
+//MODIFY IF CASES EXTENDS TWO
 @Composable
 fun AlertComponentComponent(
     modifier: Modifier = Modifier,

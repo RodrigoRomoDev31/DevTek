@@ -49,6 +49,15 @@ import com.romvaz.core.ui.theme.TypographyExtensions.captions
 import com.romvaz.core.ui.theme.TypographyExtensions.captionsBold
 import com.romvaz.core.ui.theme.devTekColors
 
+/**
+ * @param modifier Modifier to be applied to the Snackbar's layout. Default is `Modifier`.
+ * @param hostState The state of the Snackbar, used to show and manage Snackbar messages.
+ * Default is a new instance of `SnackbarHostState()`.
+ * @param snackBarTopStatus The status of the Snackbar, defining its visual appearance (e.g., SUCCESS, ERROR, WARNING).
+ * @param onClickAction A lambda function that executes when the primary action button of the
+ * Snackbar is clicked. Default is an empty lambda `{}`.
+ * @param infoClickAction A lambda function that executes when the informational action.
+ */
 @Preview
 @Composable
 fun SnackBarTopComponent(
@@ -145,6 +154,8 @@ fun SnackBarTopComponent(
                                     }
                                 }
 
+                                //Only show this text when Status == Internet
+                                // IN needed, make it dynamic and pass the resource
                                 if (snackBarTopStatus == SnackBarTopStatus.INTERNET)
                                     ProvideTextStyle(
                                         value = MaterialTheme.typography.captions
@@ -172,6 +183,7 @@ fun SnackBarTopComponent(
     }
 }
 
+// Get Content color by snack status
 @Composable
 fun SnackBarTopStatus.getContentColor(): Color = when (this) {
     SnackBarTopStatus.INTERNET,
@@ -180,6 +192,7 @@ fun SnackBarTopStatus.getContentColor(): Color = when (this) {
 
 }
 
+// Get background color by snack status
 @Composable
 fun SnackBarTopStatus.getBackgroundColor(): Color = when (this) {
     SnackBarTopStatus.INTERNET,
@@ -187,6 +200,7 @@ fun SnackBarTopStatus.getBackgroundColor(): Color = when (this) {
     SnackBarTopStatus.ERROR -> MaterialTheme.colorScheme.surface
 }
 
+// Get Border Color by snack status
 @Composable
 fun SnackBarTopStatus.getBorderColor(): Color = when (this) {
     SnackBarTopStatus.INTERNET,
@@ -194,6 +208,7 @@ fun SnackBarTopStatus.getBorderColor(): Color = when (this) {
     SnackBarTopStatus.ERROR -> MaterialTheme.devTekColors.Primary100
 }
 
+// Get Border Color by snack status
 @Composable
 fun SnackBarTopStatus.getIcon(): ImageVector = when (this) {
     SnackBarTopStatus.SUCCESS -> Icons.Filled.CheckCircle
@@ -201,12 +216,15 @@ fun SnackBarTopStatus.getIcon(): ImageVector = when (this) {
     SnackBarTopStatus.INTERNET -> Icons.Default.Refresh
 }
 
+// Enum for snack bar type
+//Add types if needed
 enum class SnackBarTopStatus {
     SUCCESS,
     ERROR,
     INTERNET
 }
 
+// Custom Class if more fields are needed
 data class SnackBarVisuals(
     override val message: String,
     override val withDismissAction: Boolean = false,

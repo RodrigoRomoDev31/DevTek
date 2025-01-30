@@ -1,5 +1,6 @@
 package com.romvaz.core.ui.utils
 
+//ALL CONSTANTS MUST BE CENTRALIZE HERE FOR MODULES USES
 //DELAYS
 const val DELAY_TIME_2000 = 2000L
 const val DELAY_TIME_1000 = 1000L
@@ -17,3 +18,7 @@ const val SLIDE_IN_OFFSET_END = 1000
 const val MAPS_ZOOM = 20f
 const val DURATION_FOR_AUTO_FOCUS_MAPS = 1000
 const val START_POSITION_FOR_MAP = 0.0
+
+// REGEX
+const val REGEX_EMAIL = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\$"
+const val REGEX_PASSWORD = "^(?=.*\\d)(?=.*[a-zA-Z])(?=.*[@#\$%^&+=!]).{8,}\$"
