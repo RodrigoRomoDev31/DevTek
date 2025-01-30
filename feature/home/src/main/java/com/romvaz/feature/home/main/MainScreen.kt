@@ -19,11 +19,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.romvaz.core.ui.R
 import com.romvaz.core.ui.components.DevTekScaffold
 import com.romvaz.core.ui.components.DevTekTransparentHeader
@@ -31,6 +33,7 @@ import com.romvaz.core.ui.components.SnackBarTopComponent
 import com.romvaz.core.ui.components.SnackBarTopStatus
 import com.romvaz.core.ui.components.SnackBarVisuals
 import com.romvaz.core.ui.theme.devTekColors
+import com.romvaz.core.ui.theme.isDarkTheme
 import com.romvaz.core.ui.utils.GlobalUtils
 
 
@@ -136,4 +139,9 @@ private fun Content(
             Text("DevTek")
         }
     }
+
+    rememberSystemUiController().setStatusBarColor(
+        color = Color.Transparent,
+        darkIcons = !isDarkTheme()
+    )
 }

@@ -52,7 +52,6 @@ class LocationService : Service() {
     private fun start() {
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle(applicationContext.getString(R.string.tracking_location))
-            .setContentText(applicationContext.getString(R.string.tracking_location_message))
             .setSmallIcon(android.R.drawable.ic_menu_mylocation)
             .setOngoing(true)
 
@@ -64,7 +63,8 @@ class LocationService : Service() {
         locationClient.getLocationUpdates(LOCATION_INTERVAL)
             .catch { e -> e.printStackTrace() }
             .onEach { location ->
-                webHookDataService.sendLocation(
+                val updatedNotification: NotificationCompat.Builder
+                val result = webHookDataService.sendLocation(
                     SendLocationPostModel(
                         latitude = location.latitude,
                         longitude = location.longitude,
@@ -72,6 +72,13 @@ class LocationService : Service() {
                         accuracy = location.accuracy,
                     )
                 )
+
+                updatedNotification = if (result.isSuccess)
+                    notification.setContentText(applicationContext.getString(R.string.tracking_location_message))
+                else
+                    notification.setContentText(applicationContext.getString(R.string.problems_with_location))
+
+                notificationManager.notify(NOTIFICATION_ID, updatedNotification.build())
             }
             .launchIn(serviceScope)
 
