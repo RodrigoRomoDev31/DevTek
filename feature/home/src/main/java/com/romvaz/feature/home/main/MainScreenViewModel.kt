@@ -67,10 +67,12 @@ class MainScreenViewModel @Inject constructor(
         store.dispatch(MainScreenAction.OnSendHelpRequest)
 
     /**
-     * Dispatches an action to the store to trigger the "SendHelp" functionality.
+     * Dispatches an action to the store to trigger the "SendHelp" functionality and update problem
      */
-    fun sendHelp() =
+    fun sendHelp(problem: String) {
+        store.dispatch(MainScreenAction.UpdateProblem(problem))
         store.dispatch(MainScreenAction.SendHelp)
+    }
 
     /**
      * Updates the current state of the location permission by invoking the updateLocationPermissionState

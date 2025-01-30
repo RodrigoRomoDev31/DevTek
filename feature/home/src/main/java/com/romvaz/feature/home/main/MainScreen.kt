@@ -95,7 +95,7 @@ private fun Content(
     locationPermissionState: Boolean,
     sendHelpRequestState: Boolean,
     sendHelpRequestCallback: () -> Unit,
-    sendHelpCallback:() -> Unit,
+    sendHelpCallback:(String) -> Unit,
     navigateToUserCallback: () -> Unit
 ) {
     val snackBarHostState = remember { SnackbarHostState() }
@@ -157,7 +157,7 @@ private fun Content(
             message = stringResource(R.string.problem_on_route_message),
             textConfirmButton = stringResource(R.string.send_help),
             textCancelButton = stringResource(R.string.cancel),
-            onClickConfirm = {sendHelpCallback()},
+            onClickConfirm = {sendHelpCallback(it)},
             onClickDismiss = { sendHelpRequestCallback() }
         )
 

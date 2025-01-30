@@ -50,7 +50,8 @@
 
     <!-- SEND HELP ALERT DIALOG -->
     <string name="problem_on_route">¿Tienes un problema?</string>
-    <string name="problem_on_route_message">Ayudanos a darte una atencion mas detallada. Selecciona una opcion</string>
+    <string name="problem_on_route_message">Ayudanos a darte una atencion mas detallada. De una breve descripción</string>
     <string name="send_help">Pedir ayuda</string>
     <string name="cancel">Cancelar</string>
+    <string name="describe_problem">Describa el problema</string>
 </resources>

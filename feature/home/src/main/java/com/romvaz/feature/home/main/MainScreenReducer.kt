@@ -49,6 +49,9 @@ class MainScreenReducer : Reducer<MainScreenUiState, MainScreenAction> {
 
             // Dispatch Action to send help and update onSendHelpRequest status
             is MainScreenAction.SendHelp -> state.copy(onSendHelpRequest = false)
+
+            // Update Problem status
+            is MainScreenAction.UpdateProblem -> state.copy(problem = action.problem)
         }
 
     /**
@@ -131,5 +134,12 @@ sealed interface MainScreenAction {
     /**
      * Action triggered to request Help
      */
-    data object OnSendHelpRequest: MainScreenAction
+    data object OnSendHelpRequest : MainScreenAction
+
+    /**
+     * Action triggered to update problem
+     */
+    data class UpdateProblem(
+        val problem: String
+    ) : MainScreenAction
 }

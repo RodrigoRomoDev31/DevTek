@@ -1,13 +1,23 @@
 package com.romvaz.feature.home.components
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.romvaz.core.ui.R
+import com.romvaz.core.ui.components.InputComponent
+import com.romvaz.core.ui.components.VerticalSpacer
 import com.romvaz.core.ui.theme.Spacings
 import com.romvaz.core.ui.theme.TypographyExtensions.captions
 import com.romvaz.core.ui.theme.TypographyExtensions.h4
@@ -24,8 +34,9 @@ fun AlertDialogComponent(
     textCancelButton: String = "",
     onDismissRequest: () -> Unit = {},
     onClickDismiss: () -> Unit = {},
-    onClickConfirm: () -> Unit
+    onClickConfirm: (String) -> Unit
 ) {
+    var problem by remember { mutableStateOf("") }
     AlertDialog(
         onDismissRequest = onDismissRequest,
         modifier = modifier,
@@ -34,7 +45,18 @@ fun AlertDialogComponent(
                 Text(text = title, style = MaterialTheme.typography.h4)
         },
         text = {
-            Text(text = message, style = MaterialTheme.typography.captions)
+            Column(modifier.wrapContentHeight()) {
+                Text(text = message, style = MaterialTheme.typography.captions)
+                VerticalSpacer(Spacings.two)
+                InputComponent(
+                    value = problem,
+                    onValueChange = { problem = it },
+                    placeholder = stringResource(R.string.describe_problem),
+                    singleLine = false,
+                    lastField = true,
+                    isPassword = false
+                )
+            }
         },
         confirmButton = {
             Text(
@@ -43,7 +65,7 @@ fun AlertDialogComponent(
                 modifier = Modifier
                     .padding(vertical = 10.dp, horizontal = Spacings.three)
                     .clickable {
-                        onClickConfirm()
+                        onClickConfirm(problem)
                     }
             )
         },

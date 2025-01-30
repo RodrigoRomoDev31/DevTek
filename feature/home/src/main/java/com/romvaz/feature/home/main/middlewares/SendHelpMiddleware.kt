@@ -35,7 +35,7 @@ class SendHelpMiddleware @Inject constructor(
                     currentState().userInfo?.createPostModel(
                         lat = currentState().userLocationRoute.lastOrNull()?.latitude?: 0.0,
                         lng = currentState().userLocationRoute.lastOrNull()?.longitude?: 0.0,
-                        problem = ""
+                        problem = currentState().problem
                     )!!
                 )
             }
