@@ -50,6 +50,6 @@ class MainScreenViewModel @Inject constructor(
         store.dispatch(MainScreenAction.SendHelp)
 
     fun updatePermissionState() =
-        permissionService.updatePermissionState()
+        permissionService.updateLocationPermissionState()
 
 }

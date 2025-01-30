@@ -1,6 +1,5 @@
 package com.romvaz.feature.home.main.middlewares
 
-import android.util.Log
 import com.romvaz.core.domain.location.LocationClientService
 import com.romvaz.core.domain.permissions.PermissionService
 import com.romvaz.core.store.StateSideEffect
@@ -21,9 +20,8 @@ class GetUserLocationMiddleware @Inject constructor(
 ) : StateSideEffect<MainScreenUiState, MainScreenAction>() {
     @OptIn(ExperimentalCoroutinesApi::class)
     override fun observe(stateFlow: Flow<MainScreenUiState>): Flow<MainScreenAction> =
-        permissionService.permissionFlow
+        permissionService.locationPermissionFlow
             .flatMapLatest { granted ->
-                Log.d("hola", granted.toString())
                 if (granted) {
                     locationClientService
                         .getLocationUpdates(DELAY_TIME_1000)

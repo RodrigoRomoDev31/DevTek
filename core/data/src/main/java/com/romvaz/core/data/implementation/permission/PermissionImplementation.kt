@@ -12,11 +12,11 @@ class PermissionImplementation(
     private val context: Context
 ): PermissionService {
 
-    private val _permissionFlow = MutableStateFlow(isPermissionGranted())
-    override val permissionFlow: StateFlow<Boolean> = _permissionFlow
+    private val _locationPermissionFlow = MutableStateFlow(isPermissionGranted())
+    override val locationPermissionFlow: StateFlow<Boolean> = _locationPermissionFlow
 
-    override fun updatePermissionState() {
-        _permissionFlow.value = isPermissionGranted()
+    override fun updateLocationPermissionState() {
+        _locationPermissionFlow.value = isPermissionGranted()
     }
 
     private fun isPermissionGranted(): Boolean {
