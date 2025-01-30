@@ -4,6 +4,8 @@ import com.romvaz.core.domain.models.api.requests.SendHelpPostModel
 import kotlinx.serialization.Serializable
 import java.util.UUID
 
+// User Preference model
+// Mostly HardCoded for Mock Login
 @Serializable
 data class HardUserPreferenceModel(
     val email: String = "",
@@ -15,6 +17,7 @@ data class HardUserPreferenceModel(
     val truckId: String = UUID.randomUUID().toString()
 )
 
+// Extension function to map HardUserPreferenceModel into SendHelpPostModel
 fun HardUserPreferenceModel.createPostModel(): SendHelpPostModel =
     SendHelpPostModel(
         operatorName = this.name,

@@ -2,10 +2,14 @@ package com.romvaz.core.domain.models.mock
 
 import com.google.android.gms.maps.model.LatLng
 
+// Model To Mock a List For User Location
+// Remove in real movement situations
 data class MockLatLngModel(
     val latLng: List<LatLng>
 ) {
     companion object {
+        // Mock List for Maps to Use
+        // THIS IS ONLY FOR DEBUG SITUATIONS
         val mockListLatLng = listOf(
             // Mexico
             LatLng(19.4326, -99.1332),  // Mexico City, CDMX
