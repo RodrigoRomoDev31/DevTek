@@ -15,6 +15,11 @@ import com.romvaz.core.ui.theme.Spacings
 import com.romvaz.core.ui.theme.TypographyExtensions.captions
 import com.romvaz.core.ui.theme.devTekColors
 
+/**
+ * @param value The current text value of the input field.
+ * @param passWord Indicates whether the input field is for a password or not.
+ * @param onValueChange Callback triggered when the text value changes, providing the updated string.
+ */
 @Composable
 fun InputFieldsComponent(
     value: String,

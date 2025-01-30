@@ -10,6 +10,8 @@ import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
+// Middleware taht is trigger with an Login Action
+// Update the HardUserPreference model when action is call
 class LoginMiddleware @Inject constructor(
     private val appPreferenceService: UserPreferenceService
 ) : ActionSideEffect<LoginScreenStateUi, LoginScreenAction>() {
