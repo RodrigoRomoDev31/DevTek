@@ -36,7 +36,6 @@ class DataModule {
         @ApplicationContext context: Context
     ): LocationClientService =
         LocationClientImplementation(
-            context,
             LocationServices.getFusedLocationProviderClient(context)
         )
 }

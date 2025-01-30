@@ -62,12 +62,7 @@ class LocationService : Service() {
         notificationManager.notify(NOTIFICATION_ID, notification.build())
 
         locationClient.getLocationUpdates(LOCATION_INTERVAL)
-            .catch { e ->
-                e.printStackTrace()
-                val updatedNotification =
-                    notification.setContentText(applicationContext.getString(R.string.problems_with_location))
-                notificationManager.notify(NOTIFICATION_ID, updatedNotification.build())
-            }
+            .catch { e -> e.printStackTrace() }
             .onEach { location ->
                 webHookDataService.sendLocation(
                     SendLocationPostModel(
