@@ -6,6 +6,7 @@ import com.romvaz.core.domain.routes.UserRoute
 import com.romvaz.core.store.Store
 import com.romvaz.core.ui.navigation.NavigationCommand
 import com.romvaz.core.ui.navigation.Navigator
+import com.romvaz.feature.home.main.middlewares.GetUserLocationMiddleware
 import com.romvaz.feature.home.main.middlewares.SendHelpMiddleware
 import com.romvaz.feature.home.main.middlewares.UserInfoMiddleware
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,14 +17,15 @@ import javax.inject.Inject
 class MainScreenViewModel @Inject constructor(
     private val navigator: Navigator,
     sendHelpMiddleware: SendHelpMiddleware,
-    userInfoMiddleware: UserInfoMiddleware
+    userInfoMiddleware: UserInfoMiddleware,
+    getUserLocationMiddleware: GetUserLocationMiddleware
 ) : ViewModel() {
 
     private val store = Store(
         MainScreenUiState(),
         MainScreenReducer(),
         viewModelScope,
-        listOf(sendHelpMiddleware, userInfoMiddleware)
+        listOf(sendHelpMiddleware, userInfoMiddleware, getUserLocationMiddleware)
     )
 
     fun observe(): StateFlow<MainScreenUiState> = store.observe()

@@ -11,6 +11,7 @@ import com.romvaz.core.domain.api.weebhook.WebHookDataService
 import com.romvaz.core.domain.location.LocationClientService
 import com.romvaz.core.domain.models.api.requests.SendLocationPostModel
 import com.romvaz.core.ui.R
+import com.romvaz.core.ui.utils.DELAY_TIME_1000
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -60,7 +61,7 @@ class LocationService : Service() {
 
         notificationManager.notify(NOTIFICATION_ID, notification.build())
 
-        locationClient.getLocationUpdates(LOCATION_INTERVAL)
+        locationClient.getLocationUpdates(DELAY_TIME_1000)
             .catch { e -> e.printStackTrace() }
             .onEach { location ->
                 val updatedNotification: NotificationCompat.Builder
@@ -114,5 +115,3 @@ class LocationService : Service() {
         private const val NOTIFICATION_ID = 1
     }
 }
-
-const val LOCATION_INTERVAL = 10000L

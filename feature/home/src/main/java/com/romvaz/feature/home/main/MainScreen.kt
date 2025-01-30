@@ -1,6 +1,5 @@
 package com.romvaz.feature.home.main
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -12,20 +11,27 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLng
+import com.google.maps.android.compose.GoogleMap
+import com.google.maps.android.compose.Marker
+import com.google.maps.android.compose.MarkerState
+import com.google.maps.android.compose.Polyline
+import com.google.maps.android.compose.rememberCameraPositionState
 import com.romvaz.core.ui.R
 import com.romvaz.core.ui.components.DevTekScaffold
 import com.romvaz.core.ui.components.DevTekTransparentHeader
@@ -34,7 +40,10 @@ import com.romvaz.core.ui.components.SnackBarTopStatus
 import com.romvaz.core.ui.components.SnackBarVisuals
 import com.romvaz.core.ui.theme.devTekColors
 import com.romvaz.core.ui.theme.isDarkTheme
+import com.romvaz.core.ui.utils.DURATION_FOR_AUTO_FOCUS_MAPS
 import com.romvaz.core.ui.utils.GlobalUtils
+import com.romvaz.core.ui.utils.MAPS_ZOOM
+import com.romvaz.core.ui.utils.START_POSITION_FOR_MAP
 
 
 @Composable
@@ -48,6 +57,7 @@ fun MainScreen(
         errorInSendHelpState = state.errorInSendHelp,
         snackBarTopStatus = state.snackBarTopStatus,
         counterState = state.counter,
+        userLocationState = state.latLng,
         sendHelpCallback = viewModel::sendHelp,
         navigateToUserCallback = viewModel::navigateToUserInfo
     )
@@ -60,11 +70,30 @@ private fun Content(
     errorInSendHelpState: Throwable?,
     snackBarTopStatus: SnackBarTopStatus,
     counterState: Int,
+    userLocationState: MutableList<LatLng>,
     sendHelpCallback: () -> Unit,
     navigateToUserCallback: () -> Unit
 ) {
     val snackBarHostState = remember { SnackbarHostState() }
     val context = LocalContext.current
+    val cameraPositionState = rememberCameraPositionState {
+        position =
+            CameraPosition.fromLatLngZoom(
+                userLocationState.firstOrNull() ?: LatLng(
+                    START_POSITION_FOR_MAP,
+                    START_POSITION_FOR_MAP
+                ), MAPS_ZOOM
+            )
+    }
+
+    LaunchedEffect(key1 = userLocationState) {
+        if (userLocationState.isNotEmpty())
+            cameraPositionState.animate(
+                update = CameraUpdateFactory.newLatLng(userLocationState.last()),
+                durationMs = DURATION_FOR_AUTO_FOCUS_MAPS
+            )
+
+    }
 
     LaunchedEffect(key1 = counterState) {
         if (counterState > 0)
@@ -131,12 +160,28 @@ private fun Content(
             )
         }
     ) { paddingValues ->
-        Box(
-            Modifier
+        GoogleMap(
+            modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues), contentAlignment = Alignment.Center
+                .padding(paddingValues),
+            cameraPositionState = cameraPositionState
         ) {
-            Text("DevTek")
+            Polyline(
+                points = userLocationState,
+                color = MaterialTheme.devTekColors.Primary100,
+                width = 8f
+            )
+
+            if (userLocationState.isNotEmpty()) {
+                Marker(
+                    state = MarkerState(userLocationState.first()),
+                    title = stringResource(R.string.route_start)
+                )
+                Marker(
+                    state = MarkerState(userLocationState.last()),
+                    title = stringResource(R.string.current_position)
+                )
+            }
         }
     }
 

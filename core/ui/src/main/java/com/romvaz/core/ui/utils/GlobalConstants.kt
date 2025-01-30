@@ -2,6 +2,7 @@ package com.romvaz.core.ui.utils
 
 //DELAYS
 const val DELAY_TIME_2000 = 2000L
+const val DELAY_TIME_1000 = 1000L
 const val DELAY_TIME_166 = 166L
 const val DELAY_TIME_100 = 100L
 
@@ -12,6 +13,7 @@ const val SPLASH_ANIMATION_SIZE = 8
 const val SLIDE_IN_OFFSET_START = 0
 const val SLIDE_IN_OFFSET_END = 1000
 
-//CARD SIZES
-const val SCREEN_HEIGHT_DIVIDER = 6
-const val SCREEN_WIDTH_DIVIDER = 2
+//MAPS
+const val MAPS_ZOOM = 20f
+const val DURATION_FOR_AUTO_FOCUS_MAPS = 1000
+const val START_POSITION_FOR_MAP = 0.0

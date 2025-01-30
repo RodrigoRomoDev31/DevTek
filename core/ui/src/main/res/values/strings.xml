@@ -42,7 +42,13 @@
     <!-- SEND HELP STATUS -->
     <string name="send_help_alert_success">Se ha notificado su peticion SOS</string>
     <string name="send_help_alert_failure">No se ha podido mandar su peticion SOS. Intente de nuevo</string>
+
+    <!-- NOTIFICATIONS MESSAGES -->
     <string name="tracking_location">Seguimiento de ubicacíon</string>
     <string name="tracking_location_message">Su ubicación esta siendo seguida por su seguridad</string>
     <string name="problems_with_location">Tenemos problemas para ubicarte. Asegurate que estas conectado a internet y con localizacion activada</string>
+
+    <!-- MAPS MARKERS -->
+    <string name="route_start">Inicio</string>
+    <string name="current_position">Posicion actual</string>
 </resources>
