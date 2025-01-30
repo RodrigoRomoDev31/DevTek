@@ -11,6 +11,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
 import androidx.navigation.compose.NavHost
@@ -56,6 +60,8 @@ class MainActivity : ComponentActivity() {
             val requestPermissionLauncher =
                 rememberLauncherForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {}
 
+            var permissionsRequested by remember { mutableStateOf(false) }
+
             // Handle permission request logic on state change
             LaunchedEffect(key1 = locationPermissionState.status) {
                 val permissionsToRequest = mutableListOf<String>()
@@ -77,7 +83,8 @@ class MainActivity : ComponentActivity() {
                 }
 
                 // If there are any permissions to request, launch the permission request
-                if (permissionsToRequest.isNotEmpty()) {
+                if (permissionsToRequest.isNotEmpty() && !permissionsRequested) {
+                    permissionsRequested = true
                     requestPermissionLauncher.launch(permissionsToRequest.toTypedArray())
                 }
             }
