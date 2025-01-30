@@ -2,24 +2,16 @@
 <resources>
     <!-- INTERNET CONNECTION -->
     <string name="no_internet_connection">Sin conexión a internet</string>
-    <string name="no_internet_connection_disclaimer">Verifica tu señal o WiFi e \nintenta de nuevo.</string>
+    <string name="no_internet_connection_disclaimer">Verifica tu señal o Wi-Fi e \nintenta de nuevo.</string>
     <string name="no_connection_in_splash_tittle">¿Sin conexión?</string>
-    <string name="no_connection_in_splash_message">Verifica tu conexion a internet e intenta de nuevo.</string>
-    <string name="lost_conection_snackbar_title">Has perdido conexón a internet</string>
+    <string name="no_connection_in_splash_message">Verifica tu conexión a internet e intenta de nuevo.</string>
+    <string name="lost_conection_snackbar_title">Has perdido conexión a internet</string>
 
     <!-- BTN COPIES -->
     <string name="btn_go_back">Regresar</string>
     <string name="btn_open_settings">Abrir ajustes</string>
     <string name="btn_accept">Aceptar</string>
     <string name="btn_close_app">Cerrar</string>
-
-    <!-- ERRORS -->
-    <string name="error_service_tittle">Ups</string>
-    <string name="error_service_messsage">Parece que hay un error, intenta de nuevo mas tarde.</string>
-    <string name="error_bad_request">Parece que tenemos un \"Badrequest\" intentalo mas tarde</string>
-    <string name="error_unauthorized_request">Parece que no estas logeado, inicia sesion e intenta de nuevo</string>
-    <string name="error_forbidden_request">"Parece que estar intentando ingresar a un sitio restringido, intenta mas tarde "</string>
-    <string name="error_internal_request">Parece que tenemos un error de nuestro lado, intenta mas tarde</string>
 
     <!-- ACCOUNT LOGIN -->
     <string name="login">Inicia sesión</string>
@@ -30,27 +22,29 @@
     <string name="error_in_login">Hubo un error, verifica tus datos e intenta de nuevo.</string>
 
     <!-- ACCOUNT INFO -->
-    <string name="user_info_tittle">Informacion del usuario</string>
+    <string name="user_info_tittle">Información del usuario</string>
     <string name="name_title">Nombre de operador</string>
     <string name="email_title">Email</string>
-    <string name="phone_title">Numero de contacto</string>
+    <string name="phone_title">Número de contacto</string>
     <string name="user_id_title">Id de operador</string>
-    <string name="truck_model">Modelo de Camion</string>
-    <string name="truck_id">Id de Camion</string>
-    <string name="truck_plate">Placa de Camion</string>
+    <string name="truck_model">Modelo de camión</string>
+    <string name="truck_id">Id de camión</string>
+    <string name="truck_plate">Placa de camión</string>
 
     <!-- SEND HELP STATUS -->
-    <string name="send_help_alert_success">Se ha notificado su peticion SOS</string>
-    <string name="send_help_alert_failure">No se ha podido mandar su peticion SOS. Intente de nuevo</string>
+    <string name="send_help_alert_success">Se ha notificado su petición SOS</string>
+    <string name="send_help_alert_failure">No se ha podido mandar su petición SOS. Intente de nuevo.</string>
 
     <!-- NOTIFICATIONS MESSAGES -->
-    <string name="tracking_location">Seguimiento de ubicacíon</string>
-    <string name="tracking_location_message">Su ubicación esta siendo seguida por su seguridad</string>
-    <string name="problems_with_location">Tenemos problemas para ubicarte. Asegurate que estas conectado a internet y con localizacion activada</string>
+    <string name="tracking_location">Seguimiento de ubicación</string>
+    <string name="tracking_location_message">Su ubicación está siendo seguida por su seguridad</string>
+    <string name="problems_with_location">Tenemos problemas para ubicarte. Asegúrate de que estás conectado a internet y con localización activada</string>
 
     <!-- MAPS MARKERS -->
     <string name="route_start">Inicio</string>
-    <string name="current_position">Posicion actual</string>
+    <string name="current_position">Posición actual</string>
+
+    <!-- LOCATION ALERT -->
     <string name="no_location_permission">Sin permiso para ubicarte</string>
-    <string name="no_location_disclaimer">Verifica tus permiso de ubicacion</string>
+    <string name="no_location_disclaimer">Verifica tus permisos de ubicación</string>
 </resources>
