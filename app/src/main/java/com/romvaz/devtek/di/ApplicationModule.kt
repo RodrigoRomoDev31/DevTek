@@ -13,6 +13,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
+// Create Main dependency Injection Module and add Modules from data and network modules
 @Module(
     includes = [
         DataModule::class,
@@ -22,12 +23,14 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class ApplicationModule {
 
+    //Provides Application context to app
     @Singleton
     @Provides
     fun providesApplication(@ApplicationContext app: Context): DevTekApplication {
         return app as DevTekApplication
     }
 
+    // Provides Navigator class to project
     @Provides
     @Singleton
     fun providesNavigator(): Navigator =
