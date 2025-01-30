@@ -8,25 +8,18 @@ import com.romvaz.core.domain.routes.UserRoute
 import com.romvaz.core.store.Store
 import com.romvaz.core.ui.navigation.NavigationCommand
 import com.romvaz.core.ui.navigation.Navigator
-import com.romvaz.feature.home.main.middlewares.GetUserLocationMiddleware
-import com.romvaz.feature.home.main.middlewares.InternetServiceMiddleware
-import com.romvaz.feature.home.main.middlewares.SendHelpMiddleware
-import com.romvaz.feature.home.main.middlewares.UserInfoMiddleware
+import com.romvaz.feature.home.main.middlewares.MainMiddlewares
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@Suppress("LongParameterList")
 @HiltViewModel
 class MainScreenViewModel @Inject constructor(
     private val navigator: Navigator,
     private val internetStatusService: InternetStatusService,
     private val permissionService: PermissionService,
-    sendHelpMiddleware: SendHelpMiddleware,
-    userInfoMiddleware: UserInfoMiddleware,
-    getUserLocationMiddleware: GetUserLocationMiddleware,
-    internetServiceMiddleware: InternetServiceMiddleware
+    mainMiddlewares: MainMiddlewares
 ) : ViewModel() {
 
     private val store = Store(
@@ -34,10 +27,10 @@ class MainScreenViewModel @Inject constructor(
         MainScreenReducer(),
         viewModelScope,
         listOf(
-            sendHelpMiddleware,
-            userInfoMiddleware,
-            getUserLocationMiddleware,
-            internetServiceMiddleware
+            mainMiddlewares.userInfoMiddleware,
+            mainMiddlewares.sendHelpMiddleware,
+            mainMiddlewares.internetServiceMiddleware,
+            mainMiddlewares.getUserLocationMiddleware
         )
     )
 
