@@ -8,8 +8,9 @@ updates, following the latest best practices in Android development.
 In order to run the project:
 
 1. Clone the project into your computer
-2. Sync project gradle files. The minimum current supported version is: 2024.1.1 Patch 1 - Koala
-3. Run the app module
+2. Set the gradle JDK to JAVA 17
+3. Sync project gradle files. The minimum current supported version is: 2024.1.1 Patch 1 - Koala
+4. Run the app module
 
 # Quality and excellence in code
 
