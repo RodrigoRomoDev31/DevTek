@@ -5,10 +5,12 @@ import com.google.android.gms.location.LocationServices
 import com.romvaz.core.data.implementation.api.WebHookDataImplementation
 import com.romvaz.core.data.implementation.location.LocationClientImplementation
 import com.romvaz.core.data.implementation.network.InternetStatusImplementation
+import com.romvaz.core.data.implementation.permission.PermissionImplementation
 import com.romvaz.core.domain.api.WebHookApi
 import com.romvaz.core.domain.api.weebhook.WebHookDataService
 import com.romvaz.core.domain.location.LocationClientService
 import com.romvaz.core.domain.network.InternetStatusService
+import com.romvaz.core.domain.permissions.PermissionService
 import com.romvaz.datastore.DataStoreModule
 import dagger.Module
 import dagger.Provides
@@ -45,5 +47,10 @@ class DataModule {
     @Singleton
     fun providesInternetStatus(@ApplicationContext context: Context): InternetStatusService =
         InternetStatusImplementation(context)
+
+    @Provides
+    @Singleton
+    fun providesPermissionService(@ApplicationContext context: Context) : PermissionService =
+        PermissionImplementation(context)
 }
 

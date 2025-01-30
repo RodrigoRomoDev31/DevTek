@@ -23,6 +23,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.isGranted
+import com.google.accompanist.permissions.rememberPermissionState
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.CameraPosition
@@ -34,9 +37,9 @@ import com.google.maps.android.compose.Polyline
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.romvaz.core.domain.models.network.InternetStatus
 import com.romvaz.core.ui.R
+import com.romvaz.core.ui.components.AlertComponentComponent
 import com.romvaz.core.ui.components.DevTekScaffold
 import com.romvaz.core.ui.components.DevTekTransparentHeader
-import com.romvaz.core.ui.components.NoInternetComponent
 import com.romvaz.core.ui.components.SnackBarTopComponent
 import com.romvaz.core.ui.components.SnackBarTopStatus
 import com.romvaz.core.ui.components.SnackBarVisuals
@@ -48,11 +51,20 @@ import com.romvaz.core.ui.utils.MAPS_ZOOM
 import com.romvaz.core.ui.utils.START_POSITION_FOR_MAP
 
 
+@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun MainScreen(
     viewModel: MainScreenViewModel = hiltViewModel()
 ) {
     val state by viewModel.observe().collectAsStateWithLifecycle()
+
+    val locationPermissionState = rememberPermissionState(
+        permission = android.Manifest.permission.ACCESS_FINE_LOCATION
+    )
+
+    LaunchedEffect(key1 = locationPermissionState.status) {
+        viewModel.updatePermissionState()
+    }
 
     Content(
         sendHelpState = state.sendHelp,
@@ -61,6 +73,7 @@ fun MainScreen(
         counterState = state.counter,
         userLocationRouteState = state.userLocationRoute,
         internetState = state.internetState,
+        locationPermissionState = locationPermissionState.status.isGranted,
         sendHelpCallback = viewModel::sendHelp,
         navigateToUserCallback = viewModel::navigateToUserInfo
     )
@@ -75,6 +88,7 @@ private fun Content(
     counterState: Int,
     userLocationRouteState: MutableList<LatLng>,
     internetState: InternetStatus,
+    locationPermissionState: Boolean,
     sendHelpCallback: () -> Unit,
     navigateToUserCallback: () -> Unit
 ) {
@@ -165,9 +179,13 @@ private fun Content(
             )
         }
     ) { paddingValues ->
-        if (internetState == InternetStatus.UNAVAILABLE_CONNECTION || internetState == InternetStatus.LOST_CONNECTION)
-            NoInternetComponent(
+        if (internetState == InternetStatus.UNAVAILABLE_CONNECTION
+            || internetState == InternetStatus.LOST_CONNECTION
+            || !locationPermissionState)
+
+            AlertComponentComponent(
                 modifier = Modifier.padding(paddingValues),
+                locationProblem = !locationPermissionState
             )
         else
             GoogleMap(

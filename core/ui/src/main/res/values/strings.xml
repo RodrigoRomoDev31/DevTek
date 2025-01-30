@@ -51,4 +51,6 @@
     <!-- MAPS MARKERS -->
     <string name="route_start">Inicio</string>
     <string name="current_position">Posicion actual</string>
+    <string name="no_location_permission">Sin permiso para ubicarte</string>
+    <string name="no_location_disclaimer">Verifica tus permiso de ubicacion</string>
 </resources>

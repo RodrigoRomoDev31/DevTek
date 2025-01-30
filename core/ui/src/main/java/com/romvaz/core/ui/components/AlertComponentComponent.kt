@@ -33,11 +33,17 @@ import com.romvaz.core.ui.theme.isDarkTheme
 import com.romvaz.core.ui.utils.GlobalUtils
 
 @Composable
-fun NoInternetComponent(
-    modifier: Modifier = Modifier
+fun AlertComponentComponent(
+    modifier: Modifier = Modifier,
+    locationProblem: Boolean
 ) {
+    val resource = if (locationProblem) R.raw.ic_location else R.raw.ic_no_internet
     val context = LocalContext.current
-    val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.ic_no_internet))
+    val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(resource))
+    val title =
+        if (locationProblem) R.string.no_location_permission else R.string.no_internet_connection
+    val disclaimer =
+        if (locationProblem) R.string.no_location_disclaimer else R.string.no_internet_connection_disclaimer
 
     Box(modifier = modifier.fillMaxSize()) {
         Column(
@@ -58,18 +64,18 @@ fun NoInternetComponent(
                 isPlaying = true,
                 iterations = LottieConstants.IterateForever,
                 alignment = Alignment.BottomCenter,
-                contentScale = ContentScale.FillBounds
+                contentScale = ContentScale.Fit
             )
 
             Text(
-                text = stringResource(id = R.string.no_internet_connection),
+                text = stringResource(id = title),
                 style = MaterialTheme.typography.h2.copy(MaterialTheme.colorScheme.onSurface),
                 modifier = Modifier.padding(bottom = Spacings.three),
                 textAlign = TextAlign.Center
             )
 
             Text(
-                text = stringResource(id = R.string.no_internet_connection_disclaimer),
+                text = stringResource(id = disclaimer),
                 style = MaterialTheme.typography.captions.copy(MaterialTheme.colorScheme.onSurface),
                 textAlign = TextAlign.Center,
                 modifier = Modifier.weight(1f)

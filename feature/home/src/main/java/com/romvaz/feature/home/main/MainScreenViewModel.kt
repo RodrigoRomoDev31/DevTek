@@ -3,6 +3,7 @@ package com.romvaz.feature.home.main
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.romvaz.core.domain.network.InternetStatusService
+import com.romvaz.core.domain.permissions.PermissionService
 import com.romvaz.core.domain.routes.UserRoute
 import com.romvaz.core.store.Store
 import com.romvaz.core.ui.navigation.NavigationCommand
@@ -16,10 +17,12 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@Suppress("LongParameterList")
 @HiltViewModel
 class MainScreenViewModel @Inject constructor(
     private val navigator: Navigator,
     private val internetStatusService: InternetStatusService,
+    private val permissionService: PermissionService,
     sendHelpMiddleware: SendHelpMiddleware,
     userInfoMiddleware: UserInfoMiddleware,
     getUserLocationMiddleware: GetUserLocationMiddleware,
@@ -52,5 +55,8 @@ class MainScreenViewModel @Inject constructor(
 
     fun sendHelp() =
         store.dispatch(MainScreenAction.SendHelp)
+
+    fun updatePermissionState() =
+        permissionService.updatePermissionState()
 
 }
