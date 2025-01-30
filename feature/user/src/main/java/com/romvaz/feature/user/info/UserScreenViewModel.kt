@@ -10,12 +10,15 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
+// View Model for UserScreen
+// Injects navigator for navigation and a middleware in charge of observe the HardUserPreference
 @HiltViewModel
 class UserScreenViewModel @Inject constructor(
     private val navigator: Navigator,
     userInfoMiddleware: UserInfoMiddleware
 ) : ViewModel() {
 
+    // Initiate store object
     private val store = Store(
         UserScreenUiState(),
         UserScreenReducer(),
@@ -25,8 +28,10 @@ class UserScreenViewModel @Inject constructor(
         )
     )
 
+    // Observe the UIState throw changes
     fun observeState(): StateFlow<UserScreenUiState> = store.observe()
 
+    // Navigate back
     fun popBack() =
         navigator.navigate(NavigationCommand.PopBackstack)
 }

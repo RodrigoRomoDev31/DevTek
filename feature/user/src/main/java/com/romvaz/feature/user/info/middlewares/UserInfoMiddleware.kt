@@ -9,6 +9,8 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
+// Middleware to observe changes in HardUserPreference
+// Triggers and UserAction Every time it changes
 class UserInfoMiddleware @Inject constructor(
     private val userPreferenceService: UserPreferenceService
 ) : StateSideEffect<UserScreenUiState, UserScreenAction>() {

@@ -6,6 +6,7 @@ import androidx.navigation.navigation
 import com.romvaz.core.domain.routes.UserRoute
 import com.romvaz.feature.user.info.UserScreen
 
+// Navigation route for login
 fun NavGraphBuilder.userGraph() {
     navigation(
         startDestination = UserRoute.UserInfoRoute.route,
