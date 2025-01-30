@@ -16,8 +16,9 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
 
-    private val timeOut: Long = 60
+    private val timeOut: Long = 60  // Timeout duration for network requests (60 seconds)
 
+    // Provides a singleton instance of OkHttpClient with custom timeouts and an interceptor
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient =
@@ -28,10 +29,10 @@ class NetworkModule {
             .addInterceptor(HeadersInterceptor())
             .build()
 
-
+    // Provides a singleton instance of Retrofit configured for the webHook API service
     @Provides
     @Singleton
-    fun provideRetrofitForMovies(
+    fun provideRetrofitForWebHook(
         okHttpClient: OkHttpClient
     ): Retrofit =
         Retrofit.Builder()
@@ -40,6 +41,7 @@ class NetworkModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
+    // Provides a singleton instance of the API service WebHookApi
     @Provides
     @Singleton
     fun provideApiService(retrofit: Retrofit): WebHookApi =
