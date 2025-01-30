@@ -14,11 +14,18 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * @param navigator The [Navigator] responsible for managing navigation actions within the app.
+ * @param userPreferenceService The service used to manage and persist user preferences.
+ */
 @HiltViewModel
 class SplashScreenViewModel @Inject constructor(
     private val navigator: Navigator,
     private val userPreferenceService: UserPreferenceService
 ) : ViewModel() {
+
+    // Verify user information saved
+    // If theres no user, navigate to LoginScreen else to MainScreen
     init {
         viewModelScope.launch {
             userPreferenceService.getPreferences().collect { userInfo ->
@@ -31,6 +38,7 @@ class SplashScreenViewModel @Inject constructor(
         }
     }
 
+    // Navigation To route in param
     private fun navigateTo(route: String) =
         navigator.navigate(
             NavigationCommand.NavigateTo(

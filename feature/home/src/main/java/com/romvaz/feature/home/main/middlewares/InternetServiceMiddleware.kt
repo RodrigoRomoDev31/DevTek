@@ -9,6 +9,10 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
+/**
+ * Middleware to observe changes in Internet Connectivity
+ * Triggers and MainAction Every time it changes
+ */
 class InternetServiceMiddleware @Inject constructor(
     private val internetStatusService: InternetStatusService
 ) : StateSideEffect<MainScreenUiState, MainScreenAction>() {

@@ -62,6 +62,7 @@ fun MainScreen(
         permission = android.Manifest.permission.ACCESS_FINE_LOCATION
     )
 
+    // When Location Permission status change, update the status on service
     LaunchedEffect(key1 = locationPermissionState.status) {
         viewModel.updatePermissionState()
     }
@@ -105,6 +106,11 @@ private fun Content(
     }
 
 
+    /**
+     * Auto Focus the camera in maps to follow user location
+     * Only trigger if userLocationRouteState is not empty and if theres internet
+     * Internet is needed to initiate CameraUpdateFactory
+     */
     LaunchedEffect(key1 = userLocationRouteState) {
         if (userLocationRouteState.isNotEmpty() && internetState == InternetStatus.HAVE_CONNECTION)
             cameraPositionState.animate(
@@ -114,6 +120,7 @@ private fun Content(
 
     }
 
+    // Manages different status depending on the counter change
     LaunchedEffect(key1 = counterState) {
         if (counterState > 0)
             if (errorInSendHelpState != null)
@@ -179,10 +186,10 @@ private fun Content(
             )
         }
     ) { paddingValues ->
+        // Shows an alert if internet or location fails
         if (internetState == InternetStatus.UNAVAILABLE_CONNECTION
             || internetState == InternetStatus.LOST_CONNECTION
             || !locationPermissionState)
-
             AlertComponentComponent(
                 modifier = Modifier.padding(paddingValues),
                 locationProblem = !locationPermissionState
@@ -194,12 +201,14 @@ private fun Content(
                     .padding(paddingValues),
                 cameraPositionState = cameraPositionState
             ) {
+                // Draw a route with a list of locations
                 Polyline(
                     points = userLocationRouteState,
                     color = MaterialTheme.devTekColors.Primary100,
                     width = 8f
                 )
 
+                // Creates Markers for first and last location
                 if (userLocationRouteState.isNotEmpty()) {
                     Marker(
                         state = MarkerState(userLocationRouteState.first()),

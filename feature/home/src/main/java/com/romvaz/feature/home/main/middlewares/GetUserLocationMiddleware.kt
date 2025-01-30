@@ -14,6 +14,10 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
+/**
+ * Middleware use to update user location
+ * Trigger every time locationPermissionFlow Changes
+ */
 class GetUserLocationMiddleware @Inject constructor(
     private val locationClientService: LocationClientService,
     private val permissionService: PermissionService

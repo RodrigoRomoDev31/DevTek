@@ -40,6 +40,7 @@ import com.romvaz.core.ui.utils.SLIDE_IN_OFFSET_START
 import com.romvaz.core.ui.utils.SPLASH_ANIMATION_SIZE
 import kotlinx.coroutines.delay
 
+// Splash Screen, contains different LaunchEffects to show animation
 @Suppress("UnusedParameter")
 @Composable
 fun SplashScreen(

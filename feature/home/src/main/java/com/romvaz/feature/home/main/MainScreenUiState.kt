@@ -5,6 +5,7 @@ import com.romvaz.core.domain.models.datastore.HardUserPreferenceModel
 import com.romvaz.core.domain.models.network.InternetStatus
 import com.romvaz.core.ui.components.SnackBarTopStatus
 
+// UI State For MainScreen
 data class MainScreenUiState(
     val userInfo: HardUserPreferenceModel? = null,
     val sendHelp: Boolean = false,

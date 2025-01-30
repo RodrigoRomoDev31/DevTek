@@ -7,6 +7,7 @@ import com.romvaz.core.domain.routes.HomeRoute
 import com.romvaz.feature.home.main.MainScreen
 import com.romvaz.feature.home.splash.SplashScreen
 
+// Navigation Graph for Main Module
 fun NavGraphBuilder.homeGraph() {
     navigation(
         startDestination = HomeRoute.SplashRoute.route,

@@ -14,6 +14,11 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
+/**
+ * Trigger by user action
+ * Send a Help request to external server
+ * The result is used to update the state to show user if request sent correctly
+ */
 class SendHelpMiddleware @Inject constructor(
     private val webHookDataService: WebHookDataService
 ) : ActionSideEffect<MainScreenUiState, MainScreenAction>() {
