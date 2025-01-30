@@ -2,7 +2,7 @@ package com.romvaz.feature.home.main
 
 import com.google.android.gms.maps.model.LatLng
 import com.romvaz.core.domain.models.datastore.HardUserPreferenceModel
-import com.romvaz.core.network.connectivity.InternetStatus
+import com.romvaz.core.domain.models.network.InternetStatus
 import com.romvaz.core.ui.components.SnackBarTopStatus
 
 data class MainScreenUiState(

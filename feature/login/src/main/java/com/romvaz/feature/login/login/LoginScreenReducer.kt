@@ -1,6 +1,6 @@
 package com.romvaz.feature.login.login
 
-import com.romvaz.core.network.connectivity.InternetStatus
+import com.romvaz.core.domain.models.network.InternetStatus
 import com.romvaz.core.store.Reducer
 import com.romvaz.feature.login.login.middlewares.onEmailChange
 import com.romvaz.feature.login.login.middlewares.onInternetChange

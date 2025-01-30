@@ -4,7 +4,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
-import com.romvaz.core.network.connectivity.InternetStatus
+import com.romvaz.core.domain.models.network.InternetStatus
 import com.romvaz.core.ui.R
 
 @Composable

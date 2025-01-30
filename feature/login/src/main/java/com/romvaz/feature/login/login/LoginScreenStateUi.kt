@@ -1,6 +1,6 @@
 package com.romvaz.feature.login.login
 
-import com.romvaz.core.network.connectivity.InternetStatus
+import com.romvaz.core.domain.models.network.InternetStatus
 
 data class LoginScreenStateUi(
     val loading: Boolean = false,

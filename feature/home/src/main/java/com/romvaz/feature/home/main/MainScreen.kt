@@ -32,7 +32,7 @@ import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.Polyline
 import com.google.maps.android.compose.rememberCameraPositionState
-import com.romvaz.core.network.connectivity.InternetStatus
+import com.romvaz.core.domain.models.network.InternetStatus
 import com.romvaz.core.ui.R
 import com.romvaz.core.ui.components.DevTekScaffold
 import com.romvaz.core.ui.components.DevTekTransparentHeader

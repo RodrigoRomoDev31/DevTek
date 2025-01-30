@@ -3,10 +3,10 @@ package com.romvaz.feature.login.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavOptions
+import com.romvaz.core.domain.models.network.InternetStatus
+import com.romvaz.core.domain.network.InternetStatusService
 import com.romvaz.core.domain.routes.HomeRoute
 import com.romvaz.core.domain.routes.LoginRoute
-import com.romvaz.core.network.connectivity.InternetStatus
-import com.romvaz.core.network.connectivity.InternetStatusService
 import com.romvaz.core.store.Store
 import com.romvaz.core.ui.navigation.NavigationCommand
 import com.romvaz.core.ui.navigation.Navigator

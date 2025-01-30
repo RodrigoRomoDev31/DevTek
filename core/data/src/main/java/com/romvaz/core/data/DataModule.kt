@@ -4,9 +4,11 @@ import android.content.Context
 import com.google.android.gms.location.LocationServices
 import com.romvaz.core.data.implementation.api.WebHookDataImplementation
 import com.romvaz.core.data.implementation.location.LocationClientImplementation
+import com.romvaz.core.data.implementation.network.InternetStatusImplementation
 import com.romvaz.core.domain.api.WebHookApi
 import com.romvaz.core.domain.api.weebhook.WebHookDataService
 import com.romvaz.core.domain.location.LocationClientService
+import com.romvaz.core.domain.network.InternetStatusService
 import com.romvaz.datastore.DataStoreModule
 import dagger.Module
 import dagger.Provides
@@ -38,5 +40,10 @@ class DataModule {
         LocationClientImplementation(
             LocationServices.getFusedLocationProviderClient(context)
         )
+
+    @Provides
+    @Singleton
+    fun providesInternetStatus(@ApplicationContext context: Context): InternetStatusService =
+        InternetStatusImplementation(context)
 }
 

@@ -1,14 +1,10 @@
 package com.romvaz.core.network
 
-import android.content.Context
 import com.romvaz.core.domain.api.WebHookApi
-import com.romvaz.core.network.connectivity.InternetStatusImplementation
-import com.romvaz.core.network.connectivity.InternetStatusService
 import com.romvaz.core.network.interceptors.HeadersInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -48,9 +44,4 @@ class NetworkModule {
     @Singleton
     fun provideApiService(retrofit: Retrofit): WebHookApi =
         retrofit.create(WebHookApi::class.java)
-
-    @Provides
-    @Singleton
-    fun providesInternetStatus(@ApplicationContext context: Context): InternetStatusService =
-        InternetStatusImplementation(context)
 }

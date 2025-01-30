@@ -1,6 +1,6 @@
 package com.romvaz.feature.home.main.middlewares
 
-import com.romvaz.core.network.connectivity.InternetStatusService
+import com.romvaz.core.domain.network.InternetStatusService
 import com.romvaz.core.store.StateSideEffect
 import com.romvaz.feature.home.main.MainScreenAction
 import com.romvaz.feature.home.main.MainScreenUiState

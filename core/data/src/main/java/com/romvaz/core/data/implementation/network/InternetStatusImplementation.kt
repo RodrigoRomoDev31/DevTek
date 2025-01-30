@@ -1,10 +1,12 @@
-package com.romvaz.core.network.connectivity
+package com.romvaz.core.data.implementation.network
 
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
 import androidx.core.content.getSystemService
+import com.romvaz.core.domain.models.network.InternetStatus
+import com.romvaz.core.domain.network.InternetStatusService
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow

@@ -2,8 +2,8 @@ package com.romvaz.feature.home.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.romvaz.core.domain.network.InternetStatusService
 import com.romvaz.core.domain.routes.UserRoute
-import com.romvaz.core.network.connectivity.InternetStatusService
 import com.romvaz.core.store.Store
 import com.romvaz.core.ui.navigation.NavigationCommand
 import com.romvaz.core.ui.navigation.Navigator
