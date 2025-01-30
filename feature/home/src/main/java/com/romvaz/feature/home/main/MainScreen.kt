@@ -90,17 +90,14 @@ private fun Content(
             )
     }
 
-    @Suppress("TooGenericExceptionCaught")
+
     LaunchedEffect(key1 = userLocationRouteState) {
-        if (userLocationRouteState.isNotEmpty())
-            try {
-                cameraPositionState.animate(
-                    update = CameraUpdateFactory.newLatLng(userLocationRouteState.last()),
-                    durationMs = DURATION_FOR_AUTO_FOCUS_MAPS
-                )
-            } catch (e:Exception){
-                e.printStackTrace()
-            }
+        if (userLocationRouteState.isNotEmpty() && internetState == InternetStatus.HAVE_CONNECTION)
+            cameraPositionState.animate(
+                update = CameraUpdateFactory.newLatLng(userLocationRouteState.last()),
+                durationMs = DURATION_FOR_AUTO_FOCUS_MAPS
+            )
+
     }
 
     LaunchedEffect(key1 = counterState) {
