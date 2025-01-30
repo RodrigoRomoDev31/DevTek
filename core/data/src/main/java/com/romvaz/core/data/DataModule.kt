@@ -19,6 +19,8 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
+// Data Main Module for dependency injection
+// Includes DataStoreModule
 @Module(
     includes = [
         DataStoreModule::class
@@ -27,6 +29,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class DataModule {
 
+    //Provides Webhook Service to App
     @Provides
     @Singleton
     fun providesWebHookService(
@@ -34,6 +37,7 @@ class DataModule {
     ): WebHookDataService =
         WebHookDataImplementation(webHookApi)
 
+    // Provides Location Client Service To App
     @Provides
     @Singleton
     fun providesLocationClientService(
@@ -43,11 +47,13 @@ class DataModule {
             LocationServices.getFusedLocationProviderClient(context)
         )
 
+    // Provides Internet Status Service to App
     @Provides
     @Singleton
     fun providesInternetStatus(@ApplicationContext context: Context): InternetStatusService =
         InternetStatusImplementation(context)
 
+    //Provides Permission State Service to App
     @Provides
     @Singleton
     fun providesPermissionService(@ApplicationContext context: Context) : PermissionService =

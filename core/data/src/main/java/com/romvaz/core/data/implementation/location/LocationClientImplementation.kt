@@ -14,35 +14,46 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.launch
 
+// Implementation of LocationClientService that provides location updates using FusedLocationProviderClient.
 class LocationClientImplementation(
+    // FusedLocationProviderClient used to request location updates
     private val client: FusedLocationProviderClient
 ) : LocationClientService {
 
+    // Provides location updates at a specified interval using callbackFlow.
+    // @param interval The interval at which location updates are requested (in milliseconds).
+    // @return A Flow emitting Location objects as location updates are received.
+    // Suppresses lint warning for missing location permission check, permission requested on Main Module
     @SuppressLint("MissingPermission")
     override fun getLocationUpdates(interval: Long): Flow<Location> =
         callbackFlow {
+            // Create a LocationRequest with specified parameters
             val request = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, interval)
-                .setWaitForAccurateLocation(false)
-                .setMinUpdateIntervalMillis(interval)
+                .setWaitForAccurateLocation(false) // No need to wait for an accurate location
+                .setMinUpdateIntervalMillis(interval) // Set minimum update interval to the specified interval
                 .build()
 
+            // Location callback to receive location updates.
             val locationCallback = object : LocationCallback() {
                 override fun onLocationResult(result: LocationResult) {
                     super.onLocationResult(result)
+                    // If locations are available, send the latest location through the Flow.
                     result.locations.lastOrNull()?.let {
-                        launch { send(it) }
+                        launch { send(it) } // Send location to the Flow.
                     }
                 }
             }
 
+            // Request location updates from the FusedLocationProviderClient.
             client.requestLocationUpdates(
-                request,
-                locationCallback,
-                Looper.getMainLooper()
+                request, // Location request with interval and accuracy.
+                locationCallback, // Callback to handle location results.
+                Looper.getMainLooper() // Use main looper for the callback.
             )
 
+            // Clean up: remove location updates when the Flow is closed or canceled.
             awaitClose {
-                client.removeLocationUpdates(locationCallback)
+                client.removeLocationUpdates(locationCallback) // Stop location updates.
             }
         }
 }
