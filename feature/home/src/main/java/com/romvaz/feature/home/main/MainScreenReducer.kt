@@ -1,7 +1,7 @@
 package com.romvaz.feature.home.main
 
-import com.google.android.gms.maps.model.LatLng
 import com.romvaz.core.domain.models.datastore.HardUserPreferenceModel
+import com.romvaz.core.domain.models.mock.MockLatLngModel
 import com.romvaz.core.store.Reducer
 import com.romvaz.core.ui.components.SnackBarTopStatus
 
@@ -21,10 +21,22 @@ class MainScreenReducer : Reducer<MainScreenUiState, MainScreenAction> {
                 snackBarTopStatus = SnackBarTopStatus.ERROR
             )
 
-            is MainScreenAction.OnUserLocation -> state.copy(latLng = (state.latLng + action.latLng).toMutableList())
+            is MainScreenAction.OnUserLocation -> state.mockData()
 
             else -> state
         }
+
+    private fun MainScreenUiState.mockData(): MainScreenUiState {
+        val mockLocation = if (index < MockLatLngModel.mockListLatLng.size)
+            MockLatLngModel.mockListLatLng[index]
+        else
+            MockLatLngModel.mockListLatLng.last()
+
+        return this.copy(
+            latLng = (latLng + mockLocation).toMutableList(),
+            index = index + 1
+        )
+    }
 }
 
 sealed interface MainScreenAction {
@@ -41,9 +53,7 @@ sealed interface MainScreenAction {
         val throwable: Throwable
     ) : MainScreenAction
 
-    data class OnUserLocation(
-        val latLng: LatLng
-    ) : MainScreenAction
+    data object OnUserLocation: MainScreenAction
 
     data object SendHelp : MainScreenAction
 }

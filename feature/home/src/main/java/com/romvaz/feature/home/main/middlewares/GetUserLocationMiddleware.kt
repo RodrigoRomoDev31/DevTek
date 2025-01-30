@@ -1,6 +1,5 @@
 package com.romvaz.feature.home.main.middlewares
 
-import com.google.android.gms.maps.model.LatLng
 import com.romvaz.core.domain.location.LocationClientService
 import com.romvaz.core.store.StateSideEffect
 import com.romvaz.core.ui.utils.DELAY_TIME_1000
@@ -18,6 +17,8 @@ class GetUserLocationMiddleware @Inject constructor(
         locationClientService
             .getLocationUpdates(DELAY_TIME_1000)
             .distinctUntilChanged()
-            .map { MainScreenAction.OnUserLocation(LatLng(it.latitude, it.longitude)) }
+            .map {
+                MainScreenAction.OnUserLocation
+            }
 
 }

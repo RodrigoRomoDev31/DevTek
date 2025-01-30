@@ -14,6 +14,7 @@ android {
 }
 
 dependencies {
+    implementation (libs.play.services.maps)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.okhttp)
     implementation(libs.converter.gson)

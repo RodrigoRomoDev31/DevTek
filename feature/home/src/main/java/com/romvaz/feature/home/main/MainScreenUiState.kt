@@ -10,5 +10,6 @@ data class MainScreenUiState(
     val errorInSendHelp: Throwable? = null,
     val snackBarTopStatus: SnackBarTopStatus = SnackBarTopStatus.SUCCESS,
     val counter: Int = 0,
-    val latLng: MutableList<LatLng> = mutableListOf()
+    val latLng: MutableList<LatLng> = mutableListOf(),
+    val index: Int = 0
 )
