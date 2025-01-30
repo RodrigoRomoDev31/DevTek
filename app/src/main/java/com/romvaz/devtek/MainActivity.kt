@@ -84,6 +84,7 @@ class MainActivity : ComponentActivity() {
 
                 // If there are any permissions to request, launch the permission request
                 if (permissionsToRequest.isNotEmpty() && !permissionsRequested) {
+                    // Ensure that the request only happen once
                     permissionsRequested = true
                     requestPermissionLauncher.launch(permissionsToRequest.toTypedArray())
                 }
