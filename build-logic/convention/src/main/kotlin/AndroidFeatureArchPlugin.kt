@@ -26,10 +26,6 @@ class AndroidFeatureArchPlugin : Plugin<Project> {
                 implementation(project(":core:domain"))
                 // Add core store module for shared data storage components
                 implementation(project(":core:store"))
-                // Add core network module for shared network communication components
-                implementation(project(":core:network"))
-                // Add core datastore module for shared DataStore functionality
-                implementation(project(":core:data:datastore"))
             }
         }
     }

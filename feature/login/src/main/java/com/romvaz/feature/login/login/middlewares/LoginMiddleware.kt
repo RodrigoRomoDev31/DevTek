@@ -1,8 +1,8 @@
 package com.romvaz.feature.login.login.middlewares
 
+import com.romvaz.core.domain.datastore.UserPreferenceService
 import com.romvaz.core.domain.models.datastore.HardUserPreferenceModel
 import com.romvaz.core.store.ActionSideEffect
-import com.romvaz.datastore.services.UserPreferenceService
 import com.romvaz.feature.login.login.LoginScreenAction
 import com.romvaz.feature.login.login.LoginScreenStateUi
 import kotlinx.coroutines.flow.Flow

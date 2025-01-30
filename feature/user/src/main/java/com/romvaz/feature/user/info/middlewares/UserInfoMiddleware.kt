@@ -1,7 +1,7 @@
 package com.romvaz.feature.user.info.middlewares
 
+import com.romvaz.core.domain.datastore.UserPreferenceService
 import com.romvaz.core.store.StateSideEffect
-import com.romvaz.datastore.services.UserPreferenceService
 import com.romvaz.feature.user.info.UserScreenAction
 import com.romvaz.feature.user.info.UserScreenUiState
 import kotlinx.coroutines.flow.Flow

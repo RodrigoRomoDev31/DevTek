@@ -3,12 +3,12 @@ package com.romvaz.feature.home.splash
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavOptions
+import com.romvaz.core.domain.datastore.UserPreferenceService
 import com.romvaz.core.domain.routes.HomeRoute
 import com.romvaz.core.domain.routes.LoginRoute
 import com.romvaz.core.ui.navigation.NavigationCommand
 import com.romvaz.core.ui.navigation.Navigator
 import com.romvaz.core.ui.utils.DELAY_TIME_2000
-import com.romvaz.datastore.services.UserPreferenceService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
