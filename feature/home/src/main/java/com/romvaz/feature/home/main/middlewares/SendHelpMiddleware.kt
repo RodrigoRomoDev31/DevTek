@@ -30,7 +30,15 @@ class SendHelpMiddleware @Inject constructor(
     ): Flow<MainScreenAction> =
         actionsFlow
             .filter { it is MainScreenAction.SendHelp }
-            .map { webHookDataService.sendHelp(currentState().userInfo?.createPostModel()!!) }
+            .map {
+                webHookDataService.sendHelp(
+                    currentState().userInfo?.createPostModel(
+                        lat = currentState().userLocationRoute.lastOrNull()?.latitude?: 0.0,
+                        lng = currentState().userLocationRoute.lastOrNull()?.longitude?: 0.0,
+                        problem = ""
+                    )!!
+                )
+            }
             .flatMapConcat { result ->
                 result.fold(
                     onSuccess = {

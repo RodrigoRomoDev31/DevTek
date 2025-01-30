@@ -1,5 +1,6 @@
 package com.romvaz.core.domain.models.datastore
 
+import com.romvaz.core.domain.models.api.requests.CurrentLocationModel
 import com.romvaz.core.domain.models.api.requests.SendHelpPostModel
 import kotlinx.serialization.Serializable
 import java.util.UUID
@@ -18,10 +19,12 @@ data class HardUserPreferenceModel(
 )
 
 // Extension function to map HardUserPreferenceModel into SendHelpPostModel
-fun HardUserPreferenceModel.createPostModel(): SendHelpPostModel =
+fun HardUserPreferenceModel.createPostModel(lat: Double, lng: Double, problem: String): SendHelpPostModel =
     SendHelpPostModel(
         operatorName = this.name,
         operatorId = this.conductorId,
         operatorPhone = this.phoneNumber,
-        operatorTruckId = this.truckId
+        operatorTruckId = this.truckId,
+        lastLocation = CurrentLocationModel(lat, lng),
+        problem = problem
     )

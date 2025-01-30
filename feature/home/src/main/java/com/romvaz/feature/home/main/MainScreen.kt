@@ -49,6 +49,7 @@ import com.romvaz.core.ui.utils.DURATION_FOR_AUTO_FOCUS_MAPS
 import com.romvaz.core.ui.utils.GlobalUtils
 import com.romvaz.core.ui.utils.MAPS_ZOOM
 import com.romvaz.core.ui.utils.START_POSITION_FOR_MAP
+import com.romvaz.feature.home.components.AlertDialogComponent
 
 
 @OptIn(ExperimentalPermissionsApi::class)
@@ -75,6 +76,8 @@ fun MainScreen(
         userLocationRouteState = state.userLocationRoute,
         internetState = state.internetState,
         locationPermissionState = locationPermissionState.status.isGranted,
+        sendHelpRequestState = state.onSendHelpRequest,
+        sendHelpRequestCallback = viewModel::sendHelpRequest,
         sendHelpCallback = viewModel::sendHelp,
         navigateToUserCallback = viewModel::navigateToUserInfo
     )
@@ -90,7 +93,9 @@ private fun Content(
     userLocationRouteState: MutableList<LatLng>,
     internetState: InternetStatus,
     locationPermissionState: Boolean,
-    sendHelpCallback: () -> Unit,
+    sendHelpRequestState: Boolean,
+    sendHelpRequestCallback: () -> Unit,
+    sendHelpCallback:() -> Unit,
     navigateToUserCallback: () -> Unit
 ) {
     val snackBarHostState = remember { SnackbarHostState() }
@@ -146,6 +151,16 @@ private fun Content(
                 )
     }
 
+    if (sendHelpRequestState)
+        AlertDialogComponent(
+            title = stringResource(R.string.problem_on_route),
+            message = stringResource(R.string.problem_on_route_message),
+            textConfirmButton = stringResource(R.string.send_help),
+            textCancelButton = stringResource(R.string.cancel),
+            onClickConfirm = {sendHelpCallback()},
+            onClickDismiss = { sendHelpRequestCallback() }
+        )
+
     DevTekScaffold(
         header = {
             DevTekTransparentHeader(
@@ -153,7 +168,7 @@ private fun Content(
                 iconTint = MaterialTheme.colorScheme.onSurface,
                 primaryAction = {
                     IconButton(onClick = {
-                        sendHelpCallback()
+                        sendHelpRequestCallback()
                     }) {
                         Icon(
                             modifier = Modifier.size(25.dp),
@@ -189,7 +204,8 @@ private fun Content(
         // Shows an alert if internet or location fails
         if (internetState == InternetStatus.UNAVAILABLE_CONNECTION
             || internetState == InternetStatus.LOST_CONNECTION
-            || !locationPermissionState)
+            || !locationPermissionState
+        )
             AlertComponentComponent(
                 modifier = Modifier.padding(paddingValues),
                 locationProblem = !locationPermissionState

@@ -47,4 +47,10 @@
     <!-- LOCATION ALERT -->
     <string name="no_location_permission">Sin permiso para ubicarte</string>
     <string name="no_location_disclaimer">Verifica tus permisos de ubicación</string>
+
+    <!-- SEND HELP ALERT DIALOG -->
+    <string name="problem_on_route">¿Tienes un problema?</string>
+    <string name="problem_on_route_message">Ayudanos a darte una atencion mas detallada. Selecciona una opcion</string>
+    <string name="send_help">Pedir ayuda</string>
+    <string name="cancel">Cancelar</string>
 </resources>

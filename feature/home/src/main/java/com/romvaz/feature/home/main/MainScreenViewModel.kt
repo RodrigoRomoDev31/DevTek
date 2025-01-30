@@ -55,10 +55,16 @@ class MainScreenViewModel @Inject constructor(
     fun observe(): StateFlow<MainScreenUiState> = store.observe()
 
     /**
-     * Navigates to the User Info screen by issuing a [NavigateTo] command.
+     * Navigates to the User Info screen by issuing a NavigateTo command.
      */
     fun navigateToUserInfo() =
         navigator.navigate(NavigationCommand.NavigateTo(UserRoute.UserInfoRoute.route))
+
+    /**
+     * Dispatches an action to the store to trigger the "SendHelpRequest" functionality.
+     */
+    fun sendHelpRequest() =
+        store.dispatch(MainScreenAction.OnSendHelpRequest)
 
     /**
      * Dispatches an action to the store to trigger the "SendHelp" functionality.
@@ -67,7 +73,7 @@ class MainScreenViewModel @Inject constructor(
         store.dispatch(MainScreenAction.SendHelp)
 
     /**
-     * Updates the current state of the location permission by invoking the [updateLocationPermissionState]
+     * Updates the current state of the location permission by invoking the updateLocationPermissionState
      */
     fun updatePermissionState() =
         permissionService.updateLocationPermissionState()

@@ -14,5 +14,6 @@ data class MainScreenUiState(
     val counter: Int = 0,
     val userLocationRoute: MutableList<LatLng> = mutableListOf(),
     val index: Int = 0,
-    val internetState: InternetStatus = InternetStatus.HAVE_CONNECTION
+    val internetState: InternetStatus = InternetStatus.HAVE_CONNECTION,
+    val onSendHelpRequest: Boolean = false
 )

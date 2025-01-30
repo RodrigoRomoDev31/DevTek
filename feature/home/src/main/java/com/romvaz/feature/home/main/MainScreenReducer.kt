@@ -44,8 +44,11 @@ class MainScreenReducer : Reducer<MainScreenUiState, MainScreenAction> {
             is MainScreenAction.OnNoInternetConnection ->
                 state.copy(internetState = InternetStatus.UNAVAILABLE_CONNECTION)
 
-            // Return the current state for any unhandled actions
-            else -> state
+            // Update onSendHelpRequest status
+            is MainScreenAction.OnSendHelpRequest -> state.copy(onSendHelpRequest = !state.onSendHelpRequest)
+
+            // Dispatch Action to send help and update onSendHelpRequest status
+            is MainScreenAction.SendHelp -> state.copy(onSendHelpRequest = false)
         }
 
     /**
@@ -124,4 +127,9 @@ sealed interface MainScreenAction {
      * Action triggered to send help.
      */
     data object SendHelp : MainScreenAction
+
+    /**
+     * Action triggered to request Help
+     */
+    data object OnSendHelpRequest: MainScreenAction
 }

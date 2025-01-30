@@ -7,5 +7,7 @@ data class SendHelpPostModel(
     @SerialName("operatorName") val operatorName: String,
     @SerialName("operatorId") val operatorId: String,
     @SerialName("operatorPhone") val operatorPhone: String,
-    @SerialName("operatorTruckId") val operatorTruckId: String
+    @SerialName("operatorTruckId") val operatorTruckId: String,
+    @SerialName("lastLocation") val lastLocation: CurrentLocationModel,
+    @SerialName("problem") val problem: String,
 )
