@@ -2,6 +2,7 @@ package com.romvaz.feature.login.login.middlewares
 
 import com.romvaz.core.domain.models.network.InternetStatus
 import com.romvaz.core.ui.components.validateMail
+import com.romvaz.core.ui.components.validatePassword
 import com.romvaz.feature.login.login.LoginScreenAction
 import com.romvaz.feature.login.login.LoginScreenStateUi
 
@@ -37,4 +38,4 @@ private fun validateBtn(
     password: String,
     internetStatus: InternetStatus
 ): Boolean =
-    email.validateMail() && internetStatus == InternetStatus.HAVE_CONNECTION && password.isNotEmpty()
+    email.validateMail() && internetStatus == InternetStatus.HAVE_CONNECTION && password.validatePassword()

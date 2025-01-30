@@ -133,4 +133,6 @@ private fun getColors(): TextFieldColors =
 
 
 const val REGEX_EMAIL = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\$"
+const val REGEX_PASSWORD = "^(?=.*\\d)(?=.*[a-zA-Z])(?=.*[@#\$%^&+=!]).{8,}\$"
 fun String.validateMail() = Regex(REGEX_EMAIL).matches(this)
+fun String.validatePassword() = Regex(REGEX_PASSWORD).matches(this)
