@@ -28,6 +28,9 @@ class MainScreenReducer : Reducer<MainScreenUiState, MainScreenAction> {
                 snackBarTopStatus = SnackBarTopStatus.INTERNET
             )
 
+            is MainScreenAction.OnNoInternetConnection ->
+                state.copy(internetState = InternetStatus.UNAVAILABLE_CONNECTION)
+
             else -> state
         }
 
@@ -61,6 +64,8 @@ sealed interface MainScreenAction {
     data class OnInternetStatus(
         val status: InternetStatus
     ) : MainScreenAction
+
+    data object OnNoInternetConnection : MainScreenAction
 
     data object OnUserLocation : MainScreenAction
 

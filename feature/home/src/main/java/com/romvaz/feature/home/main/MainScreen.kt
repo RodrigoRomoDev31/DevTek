@@ -36,6 +36,7 @@ import com.romvaz.core.network.connectivity.InternetStatus
 import com.romvaz.core.ui.R
 import com.romvaz.core.ui.components.DevTekScaffold
 import com.romvaz.core.ui.components.DevTekTransparentHeader
+import com.romvaz.core.ui.components.NoInternetComponent
 import com.romvaz.core.ui.components.SnackBarTopComponent
 import com.romvaz.core.ui.components.SnackBarTopStatus
 import com.romvaz.core.ui.components.SnackBarVisuals
@@ -82,33 +83,24 @@ private fun Content(
     val cameraPositionState = rememberCameraPositionState {
         position =
             CameraPosition.fromLatLngZoom(
-                userLocationRouteState.firstOrNull() ?: LatLng(
+                LatLng(
                     START_POSITION_FOR_MAP,
                     START_POSITION_FOR_MAP
                 ), MAPS_ZOOM
             )
     }
 
-    LaunchedEffect(key1 = internetState) {
-        when (internetState) {
-            InternetStatus.LOST_CONNECTION ->
-                snackBarHostState.showSnackbar(
-                    SnackBarVisuals(
-                        message = context.getString(R.string.lost_conection_snackbar_title),
-                        withDismissAction = false
-                    )
-                )
-            else -> {}
-        }
-    }
-
+    @Suppress("TooGenericExceptionCaught")
     LaunchedEffect(key1 = userLocationRouteState) {
         if (userLocationRouteState.isNotEmpty())
-            cameraPositionState.animate(
-                update = CameraUpdateFactory.newLatLng(userLocationRouteState.last()),
-                durationMs = DURATION_FOR_AUTO_FOCUS_MAPS
-            )
-
+            try {
+                cameraPositionState.animate(
+                    update = CameraUpdateFactory.newLatLng(userLocationRouteState.last()),
+                    durationMs = DURATION_FOR_AUTO_FOCUS_MAPS
+                )
+            } catch (e:Exception){
+                e.printStackTrace()
+            }
     }
 
     LaunchedEffect(key1 = counterState) {
@@ -176,29 +168,34 @@ private fun Content(
             )
         }
     ) { paddingValues ->
-        GoogleMap(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues),
-            cameraPositionState = cameraPositionState
-        ) {
-            Polyline(
-                points = userLocationRouteState,
-                color = MaterialTheme.devTekColors.Primary100,
-                width = 8f
+        if (internetState == InternetStatus.UNAVAILABLE_CONNECTION || internetState == InternetStatus.LOST_CONNECTION)
+            NoInternetComponent(
+                modifier = Modifier.padding(paddingValues),
             )
+        else
+            GoogleMap(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues),
+                cameraPositionState = cameraPositionState
+            ) {
+                Polyline(
+                    points = userLocationRouteState,
+                    color = MaterialTheme.devTekColors.Primary100,
+                    width = 8f
+                )
 
-            if (userLocationRouteState.isNotEmpty()) {
-                Marker(
-                    state = MarkerState(userLocationRouteState.first()),
-                    title = stringResource(R.string.route_start)
-                )
-                Marker(
-                    state = MarkerState(userLocationRouteState.last()),
-                    title = stringResource(R.string.current_position)
-                )
+                if (userLocationRouteState.isNotEmpty()) {
+                    Marker(
+                        state = MarkerState(userLocationRouteState.first()),
+                        title = stringResource(R.string.route_start)
+                    )
+                    Marker(
+                        state = MarkerState(userLocationRouteState.last()),
+                        title = stringResource(R.string.current_position)
+                    )
+                }
             }
-        }
     }
 
     rememberSystemUiController().setStatusBarColor(

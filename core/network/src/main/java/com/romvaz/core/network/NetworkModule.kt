@@ -2,8 +2,8 @@ package com.romvaz.core.network
 
 import android.content.Context
 import com.romvaz.core.domain.api.WebHookApi
-import com.romvaz.core.network.connectivity.InternetStatusInterface
-import com.romvaz.core.network.connectivity.InternetStatusInterfaceService
+import com.romvaz.core.network.connectivity.InternetStatusImplementation
+import com.romvaz.core.network.connectivity.InternetStatusService
 import com.romvaz.core.network.interceptors.HeadersInterceptor
 import dagger.Module
 import dagger.Provides
@@ -51,6 +51,6 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun providesInternetStatus(@ApplicationContext context: Context): InternetStatusInterface =
-        InternetStatusInterfaceService(context)
+    fun providesInternetStatus(@ApplicationContext context: Context): InternetStatusService =
+        InternetStatusImplementation(context)
 }

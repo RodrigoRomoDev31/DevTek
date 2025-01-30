@@ -2,7 +2,7 @@ package com.romvaz.core.network.connectivity
 
 import kotlinx.coroutines.flow.Flow
 
-interface InternetStatusInterface {
+interface InternetStatusService {
     suspend fun theresInternet(): Boolean
     val observeInternetStatus: Flow<InternetStatus>
 }

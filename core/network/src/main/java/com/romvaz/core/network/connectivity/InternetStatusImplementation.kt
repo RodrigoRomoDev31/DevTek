@@ -9,9 +9,9 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 
-class InternetStatusInterfaceService(
+class InternetStatusImplementation(
     context: Context
-) : InternetStatusInterface {
+) : InternetStatusService {
 
     private val connectivityManager = context.getSystemService<ConnectivityManager>()!!
 

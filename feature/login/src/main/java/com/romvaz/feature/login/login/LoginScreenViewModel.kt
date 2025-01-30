@@ -6,7 +6,7 @@ import androidx.navigation.NavOptions
 import com.romvaz.core.domain.routes.HomeRoute
 import com.romvaz.core.domain.routes.LoginRoute
 import com.romvaz.core.network.connectivity.InternetStatus
-import com.romvaz.core.network.connectivity.InternetStatusInterface
+import com.romvaz.core.network.connectivity.InternetStatusService
 import com.romvaz.core.store.Store
 import com.romvaz.core.ui.navigation.NavigationCommand
 import com.romvaz.core.ui.navigation.Navigator
@@ -22,7 +22,7 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginScreenViewModel @Inject constructor(
     private val navigator: Navigator,
-    private val internetStatusInterface: InternetStatusInterface,
+    private val internetStatusService: InternetStatusService,
     loginMiddleware: LoginMiddleware,
     internetServiceMiddleware: InternetServiceMiddleware
 ) : ViewModel() {
@@ -38,7 +38,7 @@ class LoginScreenViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            if (!internetStatusInterface.theresInternet())
+            if (!internetStatusService.theresInternet())
                 store.dispatch(LoginScreenAction.OnInternetStatus(InternetStatus.UNAVAILABLE_CONNECTION))
         }
     }
