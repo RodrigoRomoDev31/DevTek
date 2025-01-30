@@ -2,6 +2,7 @@ package com.romvaz.feature.home.main
 
 import com.romvaz.core.domain.models.datastore.HardUserPreferenceModel
 import com.romvaz.core.domain.models.mock.MockLatLngModel
+import com.romvaz.core.network.connectivity.InternetStatus
 import com.romvaz.core.store.Reducer
 import com.romvaz.core.ui.components.SnackBarTopStatus
 
@@ -22,6 +23,10 @@ class MainScreenReducer : Reducer<MainScreenUiState, MainScreenAction> {
             )
 
             is MainScreenAction.OnUserLocation -> state.mockData()
+            is MainScreenAction.OnInternetStatus -> state.copy(
+                internetState = action.status,
+                snackBarTopStatus = SnackBarTopStatus.INTERNET
+            )
 
             else -> state
         }
@@ -33,7 +38,7 @@ class MainScreenReducer : Reducer<MainScreenUiState, MainScreenAction> {
             MockLatLngModel.mockListLatLng.last()
 
         return this.copy(
-            latLng = (latLng + mockLocation).toMutableList(),
+            userLocationRoute = (userLocationRoute + mockLocation).toMutableList(),
             index = index + 1
         )
     }
@@ -53,7 +58,11 @@ sealed interface MainScreenAction {
         val throwable: Throwable
     ) : MainScreenAction
 
-    data object OnUserLocation: MainScreenAction
+    data class OnInternetStatus(
+        val status: InternetStatus
+    ) : MainScreenAction
+
+    data object OnUserLocation : MainScreenAction
 
     data object SendHelp : MainScreenAction
 }

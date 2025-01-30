@@ -2,6 +2,7 @@ package com.romvaz.feature.home.main
 
 import com.google.android.gms.maps.model.LatLng
 import com.romvaz.core.domain.models.datastore.HardUserPreferenceModel
+import com.romvaz.core.network.connectivity.InternetStatus
 import com.romvaz.core.ui.components.SnackBarTopStatus
 
 data class MainScreenUiState(
@@ -10,6 +11,7 @@ data class MainScreenUiState(
     val errorInSendHelp: Throwable? = null,
     val snackBarTopStatus: SnackBarTopStatus = SnackBarTopStatus.SUCCESS,
     val counter: Int = 0,
-    val latLng: MutableList<LatLng> = mutableListOf(),
-    val index: Int = 0
+    val userLocationRoute: MutableList<LatLng> = mutableListOf(),
+    val index: Int = 0,
+    val internetState: InternetStatus = InternetStatus.HAVE_CONNECTION
 )

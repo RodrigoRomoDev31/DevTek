@@ -32,6 +32,7 @@ import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.Polyline
 import com.google.maps.android.compose.rememberCameraPositionState
+import com.romvaz.core.network.connectivity.InternetStatus
 import com.romvaz.core.ui.R
 import com.romvaz.core.ui.components.DevTekScaffold
 import com.romvaz.core.ui.components.DevTekTransparentHeader
@@ -57,7 +58,8 @@ fun MainScreen(
         errorInSendHelpState = state.errorInSendHelp,
         snackBarTopStatus = state.snackBarTopStatus,
         counterState = state.counter,
-        userLocationState = state.latLng,
+        userLocationRouteState = state.userLocationRoute,
+        internetState = state.internetState,
         sendHelpCallback = viewModel::sendHelp,
         navigateToUserCallback = viewModel::navigateToUserInfo
     )
@@ -70,7 +72,8 @@ private fun Content(
     errorInSendHelpState: Throwable?,
     snackBarTopStatus: SnackBarTopStatus,
     counterState: Int,
-    userLocationState: MutableList<LatLng>,
+    userLocationRouteState: MutableList<LatLng>,
+    internetState: InternetStatus,
     sendHelpCallback: () -> Unit,
     navigateToUserCallback: () -> Unit
 ) {
@@ -79,17 +82,30 @@ private fun Content(
     val cameraPositionState = rememberCameraPositionState {
         position =
             CameraPosition.fromLatLngZoom(
-                userLocationState.firstOrNull() ?: LatLng(
+                userLocationRouteState.firstOrNull() ?: LatLng(
                     START_POSITION_FOR_MAP,
                     START_POSITION_FOR_MAP
                 ), MAPS_ZOOM
             )
     }
 
-    LaunchedEffect(key1 = userLocationState) {
-        if (userLocationState.isNotEmpty())
+    LaunchedEffect(key1 = internetState) {
+        when (internetState) {
+            InternetStatus.LOST_CONNECTION ->
+                snackBarHostState.showSnackbar(
+                    SnackBarVisuals(
+                        message = context.getString(R.string.lost_conection_snackbar_title),
+                        withDismissAction = false
+                    )
+                )
+            else -> {}
+        }
+    }
+
+    LaunchedEffect(key1 = userLocationRouteState) {
+        if (userLocationRouteState.isNotEmpty())
             cameraPositionState.animate(
-                update = CameraUpdateFactory.newLatLng(userLocationState.last()),
+                update = CameraUpdateFactory.newLatLng(userLocationRouteState.last()),
                 durationMs = DURATION_FOR_AUTO_FOCUS_MAPS
             )
 
@@ -167,18 +183,18 @@ private fun Content(
             cameraPositionState = cameraPositionState
         ) {
             Polyline(
-                points = userLocationState,
+                points = userLocationRouteState,
                 color = MaterialTheme.devTekColors.Primary100,
                 width = 8f
             )
 
-            if (userLocationState.isNotEmpty()) {
+            if (userLocationRouteState.isNotEmpty()) {
                 Marker(
-                    state = MarkerState(userLocationState.first()),
+                    state = MarkerState(userLocationRouteState.first()),
                     title = stringResource(R.string.route_start)
                 )
                 Marker(
-                    state = MarkerState(userLocationState.last()),
+                    state = MarkerState(userLocationRouteState.last()),
                     title = stringResource(R.string.current_position)
                 )
             }
