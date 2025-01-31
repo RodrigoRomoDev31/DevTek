@@ -2,6 +2,7 @@ plugins {
     id("arch.android.library")
     id("arch.android.hilt")
     id("arch.android.datastore")
+    id("arch.android.test")
 }
 
 android {

@@ -16,7 +16,6 @@ import kotlinx.coroutines.launch
 
 // Implementation of LocationClientService that provides location updates using FusedLocationProviderClient.
 class LocationClientImplementation(
-    // FusedLocationProviderClient used to request location updates
     private val client: FusedLocationProviderClient
 ) : LocationClientService {
 
