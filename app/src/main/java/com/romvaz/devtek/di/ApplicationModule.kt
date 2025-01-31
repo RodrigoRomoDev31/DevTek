@@ -16,14 +16,14 @@ import javax.inject.Singleton
 // Main DI module for the application.
 // This module includes dependencies from the DataModule and NetworkModule
 // and provides essential application-level services like the application context and navigator.
+// The module is installed in SingletonComponent, meaning its dependencies will have a singleton scope across the app.
 
 @Module(
     includes = [
-        DataModule::class,    // Includes DataModule which provides services related to data storage and API calls.
-        NetworkModule::class  // Includes NetworkModule which provides services related to network and API requests.
+        DataModule::class,
+        NetworkModule::class
     ]
 )
-// The module is installed in SingletonComponent, meaning its dependencies will have a singleton scope across the app.
 @InstallIn(SingletonComponent::class)
 class ApplicationModule {
 
@@ -40,5 +40,5 @@ class ApplicationModule {
     @Provides
     @Singleton
     fun providesNavigator(): Navigator =
-        ComposeNavigator()  // Provides a single instance of ComposeNavigator as the navigator for the app.
+        ComposeNavigator()
 }

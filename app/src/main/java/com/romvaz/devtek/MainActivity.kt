@@ -33,22 +33,22 @@ import com.romvaz.feature.user.userGraph
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-@AndroidEntryPoint // Hilt entry point for dependency injection
+// The module is installed in SingletonComponent, meaning its dependencies will have a singleton scope across the app.
+// Injected Navigator instance for navigation purposes
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    // Injected Navigator instance for navigation purposes
+
     @Inject
     lateinit var navigator: Navigator
 
-    @OptIn(ExperimentalPermissionsApi::class) // Opt-in for experimental permissions API
+    @OptIn(ExperimentalPermissionsApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge() // Enables edge-to-edge display (full-screen experience)
+        enableEdgeToEdge()
         setContent {
-            // Set content to use window insets for better layout
             WindowCompat.setDecorFitsSystemWindows(window, false)
 
-            // Remember navController for navigation
             val navController = rememberNavController()
 
             // Permission state for location permission
@@ -70,7 +70,6 @@ class MainActivity : ComponentActivity() {
                 if (locationPermissionState.status is PermissionStatus.Denied) {
                     permissionsToRequest.add(android.Manifest.permission.ACCESS_FINE_LOCATION)
                 } else {
-                    // If permission is granted, manage the location service
                     manageLocationService()
                 }
 
@@ -84,28 +83,27 @@ class MainActivity : ComponentActivity() {
 
                 // If there are any permissions to request, launch the permission request
                 if (permissionsToRequest.isNotEmpty() && !permissionsRequested) {
-                    // Ensure that the request only happen once
                     permissionsRequested = true
                     requestPermissionLauncher.launch(permissionsToRequest.toTypedArray())
                 }
             }
 
             // Set the theme and build the UI
+            // Setup the navigation host with multiple graphs
+            // Define the navigation graphs
             DevTekTheme {
                 Column {
-                    // Setup the navigation host with multiple graphs
                     NavHost(
                         navController = navController,
                         startDestination = HomeRoute.RootRoute.route,
                         modifier = Modifier.weight(1.0f)
                     ) {
-                        // Define the navigation graphs
                         loginGraph()
                         homeGraph()
                         userGraph()
                     }
                 }
-                // Handle navigation actions with the injected navigator
+
                 NavigatorHandler(navigator = navigator, navController = navController)
             }
         }
@@ -113,7 +111,6 @@ class MainActivity : ComponentActivity() {
 
     // Starts the location service when location permission is granted
     private fun manageLocationService() {
-        // Start the LocationService with an action to begin the service
         Intent(this@MainActivity, LocationService::class.java).apply {
             action = LocationService.ACTION_START
             startService(this)
