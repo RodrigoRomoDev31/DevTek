@@ -7,9 +7,9 @@ class JvmLibraryArchPlugin : Plugin<Project> {
 
     // The apply function is called when the plugin is applied to a project
     override fun apply(target: Project) {
+
         with(target) {
             with(pluginManager) {
-                // Apply the Kotlin JVM plugin to enable Kotlin support for JVM-based projects
                 apply("org.jetbrains.kotlin.jvm")
             }
 

@@ -13,21 +13,17 @@ internal fun Project.configureAndroidCompose(
     commonExtension: CommonExtension<*, *, *, *, *, *>
 ) {
     // Apply the necessary Compose configurations within the provided CommonExtension
+    // Enable the Compose build feature to include Compose support in the project
     commonExtension.apply {
-        // Enable the Compose build feature to include Compose support in the project
         buildFeatures {
             compose = true
         }
 
         // Add dependencies necessary for Compose functionality
         dependencies {
-            // Get the BOM (Bill of Materials) for Compose to ensure consistent versioning across dependencies
             val bom = libs.library("androidx-compose-bom")
-            // Apply the BOM for the Compose dependencies
             implementation(platform(bom))
-            // Add the core Compose UI components from the Compose library bundle
             implementation(libs.bundle("androidx-compose"))
-            // Add the Lifecycle Compose library for integrating Compose with Android Lifecycle components
             implementation(libs.bundle("androidx-lifecycle-compose"))
         }
     }
