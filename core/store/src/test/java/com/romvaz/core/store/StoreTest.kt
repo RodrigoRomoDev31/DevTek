@@ -9,6 +9,20 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 
+/**
+ * Unit tests for the Store class.
+ *
+ * This test class verifies the behavior of the Store implementation, ensuring that:
+ * - Actions are properly dispatched and result in correct state updates.
+ * - The reducer correctly processes actions to modify the state.
+ * - Middleware (side effects) can be integrated into the store.
+ * - The store maintains consistency when handling multiple actions.
+ *
+ * The tests follow the Given-When-Then structure:
+ * - **Given**: The initial setup of the store, including its reducer and middleware.
+ * - **When**: Actions are dispatched to the store.
+ * - **Then**: The state updates as expected.
+ */
 @ExperimentalCoroutinesApi
 class StoreTest {
 
@@ -58,5 +72,4 @@ class StoreTest {
         val updatedState = store.observe().first()
         assertEquals("initialaction1action2", updatedState)
     }
-
 }

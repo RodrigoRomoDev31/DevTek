@@ -12,6 +12,19 @@ import okhttp3.Request
 import okhttp3.Response
 import org.junit.Test
 
+/**
+ * Unit tests for the HeadersInterceptor class.
+ *
+ * This test class ensures that:
+ * - The interceptor correctly adds the required headers to outgoing HTTP requests.
+ * - The "Accept" header is properly included with the expected value ("application/json").
+ * - The interceptor correctly processes requests using OkHttp's Interceptor.Chain.
+ *
+ * The tests follow the Given-When-Then structure:
+ * - **Given**: A mock request and an interceptor instance.
+ * - **When**: The interceptor processes the request.
+ * - **Then**: The expected headers are added and verified.
+ */
 class HeadersInterceptorTest {
 
     private val interceptor = HeadersInterceptor()

@@ -31,8 +31,25 @@ import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import retrofit2.Response
 
+/**
+ * Unit tests for the WebHookDataImplementation class.
+ *
+ * This test class ensures that:
+ * - API requests to send help and location data are handled correctly.
+ * - API responses are properly processed, including success and error cases.
+ * - The `safeCall` function correctly wraps API responses into `ApiResponse`.
+ * - The `asApiResponse` function correctly maps Retrofit responses to `ApiResponse`.
+ * - The `asResult` function properly converts `ApiResponse` into Kotlin’s `Result`.
+ * - The implementation correctly integrates with coroutines and dependency injections.
+ *
+ * The tests follow the Given-When-Then structure:
+ * - **Given**: The setup of API dependencies and test cases.
+ * - **When**: API requests are made.
+ * - **Then**: The expected responses and behaviors are validated.
+ */
 class WebHookDataImplementationTest {
 
+    // Mock instance of WebHookApi for testing
     @Mock
     private lateinit var webHookApi: WebHookApi
 
@@ -42,14 +59,20 @@ class WebHookDataImplementationTest {
     @OptIn(ExperimentalCoroutinesApi::class)
     @Before
     fun setUp() {
+        // Initialize mocks
         MockitoAnnotations.openMocks(this)
+
+        // Set the main dispatcher for testing
         Dispatchers.setMain(testDispatcher)
+
+        // Initialize the service with the mocked API and test dispatcher
         webHookDataService = WebHookDataImplementation(webHookApi, testDispatcher)
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @After
     fun tearDown() {
+        // Reset the main dispatcher to its original state after tests
         Dispatchers.resetMain()
     }
 

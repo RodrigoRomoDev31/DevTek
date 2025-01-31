@@ -15,6 +15,19 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 
+/**
+ * Unit tests for the UserPreferencesImplementation class.
+ *
+ * This test class ensures that:
+ * - The `getPreferences` function correctly retrieves user preferences from DataStore.
+ * - The `updateUserInfo` function properly updates user preferences in DataStore.
+ * - The implementation correctly handles coroutine dispatching.
+ *
+ * The tests follow the Given-When-Then structure:
+ * - **Given**: The setup of DataStore and coroutine dependencies.
+ * - **When**: User preferences are retrieved or updated.
+ * - **Then**: The expected data is returned or updated correctly.
+ */
 class UserPreferencesImplementationTest {
 
     private lateinit var userPreferences: UserPreferencesImplementation

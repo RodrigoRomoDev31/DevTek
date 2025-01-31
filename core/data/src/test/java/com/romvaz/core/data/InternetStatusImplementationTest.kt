@@ -14,6 +14,16 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 
+/**
+ * Unit tests for the InternetStatusService implementation.
+ *
+ * This test class verifies that:
+ * - `theresInternet` correctly returns `true` when an active network with internet capabilities is available.
+ * - `theresInternet` correctly returns `false` when no active network or internet capabilities are detected.
+ *
+ * The tests use mock Context, ConnectivityManager, Network, and NetworkCapabilities to simulate network conditions
+ * and validate the behavior of the service under different scenarios (internet available or not).
+ */
 class InternetStatusImplementationTest {
 
     private lateinit var internetStatusService: InternetStatusService

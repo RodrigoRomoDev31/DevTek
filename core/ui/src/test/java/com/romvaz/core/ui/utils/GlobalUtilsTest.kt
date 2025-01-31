@@ -5,6 +5,19 @@ import com.romvaz.core.ui.utils.GlobalUtils.validatePassword
 import org.junit.Assert
 import org.junit.Test
 
+/**
+ * Unit tests for the GlobalUtils utility functions.
+ *
+ * This test class verifies the correctness of email and password validation methods.
+ *
+ * - `validateMail`: Ensures that the function correctly identifies valid and invalid email formats.
+ * - `validatePassword`: Ensures that the function correctly differentiates between strong and weak passwords.
+ *
+ * The tests follow the Given-When-Then structure:
+ * - **Given**: The test setup and input values.
+ * - **When**: The execution of the function under test.
+ * - **Then**: The assertion of expected outcomes.
+ */
 class GlobalUtilsTest {
 
     @Test

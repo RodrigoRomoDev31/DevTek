@@ -15,6 +15,17 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
 
+/**
+ * Unit tests for the PermissionImplementation class.
+ *
+ * This test class verifies that:
+ * - `locationPermissionFlow` correctly emits `true` when the location permission is granted.
+ * - `locationPermissionFlow` correctly emits `false` when the location permission is denied.
+ * - `updateLocationPermissionState` updates the permission state dynamically when the permission status changes.
+ *
+ * The tests use mock Context and static function mocking to simulate permission states and validate
+ * that the implementation reacts appropriately to permission changes.
+ */
 class PermissionImplementationTest {
 
     private lateinit var permissionImplementation: PermissionImplementation
