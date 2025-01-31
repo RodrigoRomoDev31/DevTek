@@ -10,7 +10,7 @@ In order to run the project:
 1. Clone the project into your computer
 2. Set the gradle JDK to JAVA 17
 3. Sync project gradle files. The minimum current supported version is: 2024.1.1 Patch 1 - Koala
-4. Run the app module
+4. Run the app module on master
 
 # Quality and excellence in code
 
