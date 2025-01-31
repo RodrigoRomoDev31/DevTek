@@ -96,7 +96,8 @@ This flow displays the map with the user's moving location path (fictitious rout
 It includes two buttons: one for the profile and one for alerts.
 
 1. The profile button will navigate to the user's data screen.
-2. The alert button will send the user's data to a remote server with contact information to request
+2. The alert button will pop a alert to confirm, cancel and detail the problem. Confirm action will
+   send the user's data to a remote server with contact information to request
    assistance. The user will be notified via a snackbar whether the alert was sent successfully or
    if there was an error.
 
@@ -162,14 +163,14 @@ interacts with DataStore:
 
 1. GetPreferences: Ensures that data stored in DataStore is retrieved correctly.
 2. UpdateUserInfo: Verifies that user preferences are correctly updated in DataStore.
-   
+
 #### Permission Management
 
 PermissionImplementation: The permission management functionality was tested, particularly related
 to location permissions:
 
 1. LocationPermissionFlow: Verifies that the location permission flow works based on the current
-permission state (granted or denied).
+   permission state (granted or denied).
 2. UpdateLocationPermissionState: Tests that the permission state is updated correctly.
 
 #### Internet Connection Status
@@ -177,8 +178,9 @@ permission state (granted or denied).
 InternetStatusService: The internet connection status service was validated to ensure it accurately
 determines internet connectivity:
 
-1. TheresInternet: Verifies that the service returns true when the internet is available and false when
-it is not.
+1. TheresInternet: Verifies that the service returns true when the internet is available and false
+   when
+   it is not.
 
 ### Conclusion
 
