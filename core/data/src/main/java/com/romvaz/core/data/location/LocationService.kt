@@ -22,57 +22,57 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
-@AndroidEntryPoint // Hilt entry point for dependency injection in service
+/**
+ * Hilt entry point for dependency injection in service
+ * Injected LocationClientService to handle location updates
+ * Injected WebHookDataService to send location data to a web service
+ */
+@AndroidEntryPoint //
 class LocationService : Service() {
 
-    // CoroutineScope for managing background tasks in the service
     private val serviceScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
-    // Injected LocationClientService to handle location updates
     @Inject
     lateinit var locationClient: LocationClientService
 
-    // Injected WebHookDataService to send location data to a web service
     @Inject
     lateinit var webHookDataService: WebHookDataService
 
-    // onBind is not needed for this service, returns null
     override fun onBind(intent: Intent?): IBinder? = null
 
     // onCreate initializes the service and creates notification channel
     override fun onCreate() {
         super.onCreate()
-        createNotificationChannel() // Setup notification channel for foreground service
+        createNotificationChannel()
     }
 
     // onStartCommand handles the start and stop actions of the service
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         intent?.action?.let { action ->
             when (action) {
-                ACTION_START -> start() // Start location updates when ACTION_START is received
-                ACTION_STOP -> stop()   // Stop location updates when ACTION_STOP is received
+                ACTION_START -> start()
+                ACTION_STOP -> stop()
             }
         }
-        return START_NOT_STICKY // Service is not sticky, it won't restart automatically if it is killed
+        return START_NOT_STICKY
     }
 
     // Start method to begin location tracking and send data via webhook
     private fun start() {
-        // Create the notification for foreground service
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle(applicationContext.getString(R.string.tracking_location))
             .setSmallIcon(android.R.drawable.ic_menu_mylocation)
-            .setOngoing(true) // Ongoing notification to indicate activity
+            .setOngoing(true)
 
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        notificationManager.notify(NOTIFICATION_ID, notification.build()) // Show notification
+        notificationManager.notify(NOTIFICATION_ID, notification.build())
 
         // Start receiving location updates and send data to the server
         locationClient.getLocationUpdates(DELAY_TIME_1000)
-            .catch { e -> e.printStackTrace() } // Catch errors in location updates
+            .catch { e -> e.printStackTrace() }
             .onEach { location ->
-                // Create notification based on the success or failure of sending location
                 val updatedNotification: NotificationCompat.Builder
                 val result = webHookDataService.sendLocation(
                     SendLocationPostModel(
@@ -83,31 +83,29 @@ class LocationService : Service() {
                     )
                 )
 
-                // Update notification text based on the result of the webhook request
                 updatedNotification = if (result.isSuccess)
                     notification.setContentText(applicationContext.getString(R.string.tracking_location_message))
                 else
                     notification.setContentText(applicationContext.getString(R.string.problems_with_location))
 
-                notificationManager.notify(NOTIFICATION_ID, updatedNotification.build()) // Update notification
+                notificationManager.notify(NOTIFICATION_ID, updatedNotification.build())
             }
-            .launchIn(serviceScope) // Launch location updates in the service's coroutine scope
+            .launchIn(serviceScope)
 
-        // Start the service in the foreground with the notification
         startForeground(NOTIFICATION_ID, notification.build())
     }
 
     // Stop method to cancel the service and stop location updates
     private fun stop() {
-        stopForeground(STOP_FOREGROUND_REMOVE) // Remove the notification
-        stopSelf() // Stop the service
-        serviceScope.cancel() // Cancel ongoing background tasks
+        stopForeground(STOP_FOREGROUND_REMOVE)
+        stopSelf()
+        serviceScope.cancel()
     }
 
     // onDestroy cleans up the service when it is destroyed
     override fun onDestroy() {
         super.onDestroy()
-        serviceScope.cancel() // Cancel any remaining tasks in the service scope
+        serviceScope.cancel()
     }
 
     // Create a notification channel for location tracking notifications
@@ -115,14 +113,14 @@ class LocationService : Service() {
         val channel = NotificationChannel(
             CHANNEL_ID,
             CHANEL_NAME,
-            NotificationManager.IMPORTANCE_LOW // Low importance for background tracking notifications
+            NotificationManager.IMPORTANCE_LOW
         )
         val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        manager.createNotificationChannel(channel) // Create the notification channel
+        manager.createNotificationChannel(channel)
     }
 
+    // Constants for service actions and notification details
     companion object {
-        // Constants for service actions and notification details
         const val ACTION_START = "ACTION_START"
         const val ACTION_STOP = "ACTION_STOP"
         private const val CHANNEL_ID = "location_channel"

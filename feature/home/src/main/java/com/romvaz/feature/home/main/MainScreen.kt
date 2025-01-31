@@ -201,6 +201,7 @@ private fun Content(
             )
         }
     ) { paddingValues ->
+
         // Shows an alert if internet or location fails
         if (internetState == InternetStatus.UNAVAILABLE_CONNECTION
             || internetState == InternetStatus.LOST_CONNECTION

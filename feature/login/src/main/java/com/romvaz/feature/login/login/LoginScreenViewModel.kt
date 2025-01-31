@@ -42,10 +42,6 @@ class LoginScreenViewModel @Inject constructor(
 
     fun observeState(): StateFlow<LoginScreenStateUi> = store.observe()
 
-    /**
-     * Obtain if the connection id available
-     * If not, dispatch a LoginAction to update InternetState
-     */
     init {
         viewModelScope.launch {
             if (!internetStatusService.theresInternet())
@@ -53,18 +49,10 @@ class LoginScreenViewModel @Inject constructor(
         }
     }
 
-    /**
-     * Call a LoginAction to Update EmailState
-     */
     fun updateEmail(value: String) = store.dispatch(LoginScreenAction.OnEmailChange(value))
 
-    // Call a LoginAction to Update PasswordState
     fun updatePassword(value: String) = store.dispatch(LoginScreenAction.OnPasswordChange(value))
 
-    /** Call a LoginAction to Log a user.
-     * The response time is mock with a delay for debug purposes. DELETE IF NOT NEEDED
-     * Navigate TO Main Screen removing the current screen from stack
-     */
     fun loginUser() = viewModelScope.launch {
         store.dispatch(LoginScreenAction.LoginHardUser)
         delay(DELAY_TIME_2000)

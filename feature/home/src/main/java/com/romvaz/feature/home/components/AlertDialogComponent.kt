@@ -25,6 +25,18 @@ import com.romvaz.core.ui.theme.TypographyExtensions.utilityUppercaseBold
 import com.romvaz.core.ui.theme.devTekColors
 import com.romvaz.core.ui.theme.isDarkTheme
 
+/**
+ * Composable function to display a customizable dialog.
+ *
+ * @param modifier Modifier for styling and layout adjustments.
+ * @param title The title text of the dialog. Default is an empty string.
+ * @param message The main message displayed in the dialog.
+ * @param textConfirmButton The text for the confirmation button.
+ * @param textCancelButton The text for the cancel button. Default is an empty string.
+ * @param onDismissRequest Callback triggered when the dialog is dismissed. Default is an empty lambda.
+ * @param onClickDismiss Callback triggered when the dismiss button is clicked. Default is an empty lambda.
+ * @param onClickConfirm Callback triggered when the confirm button is clicked, passing the input text.
+ */
 @Composable
 fun AlertDialogComponent(
     modifier: Modifier = Modifier,

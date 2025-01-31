@@ -75,8 +75,6 @@ private fun Content(
     val snackBarHostState = remember { SnackbarHostState() }
     val context = LocalContext.current
 
-    // React every time internetState changes
-    // Depending on state, it shows a snackBar
     LaunchedEffect(key1 = internetState) {
         when (internetState) {
             InternetStatus.UNAVAILABLE_CONNECTION ->

@@ -16,7 +16,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
 
-    private val timeOut: Long = 60  // Timeout duration for network requests (60 seconds)
+    private val timeOut: Long = 60
 
     // Provides a singleton instance of OkHttpClient with custom timeouts and an interceptor
     @Provides

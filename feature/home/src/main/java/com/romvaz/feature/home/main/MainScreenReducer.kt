@@ -14,43 +14,34 @@ class MainScreenReducer : Reducer<MainScreenUiState, MainScreenAction> {
 
     override fun reduce(state: MainScreenUiState, action: MainScreenAction): MainScreenUiState =
         when (action) {
-            // Update user information in the state
             is MainScreenAction.OnUserInfoChange -> state.copy(userInfo = action.userPreferenceModel)
 
-            // Update send help status and snackbar state, and increment counter
             is MainScreenAction.OnSendHelp -> state.copy(
                 sendHelp = action.sendHelp,
                 snackBarTopStatus = action.topStatus,
                 counter = state.counter + 1
             )
 
-            // Update the error in sending help, snackbar status, and increment counter
             is MainScreenAction.OnErrorInSendHelp -> state.copy(
                 errorInSendHelp = action.throwable,
                 counter = state.counter + 1,
                 snackBarTopStatus = SnackBarTopStatus.ERROR
             )
 
-            // Mock user location data and return updated state
             is MainScreenAction.OnUserLocation -> state.mockData()
 
-            // Update internet status and snackbar state
             is MainScreenAction.OnInternetStatus -> state.copy(
                 internetState = action.status,
                 snackBarTopStatus = SnackBarTopStatus.INTERNET
             )
 
-            // Handle no internet connection scenario
             is MainScreenAction.OnNoInternetConnection ->
                 state.copy(internetState = InternetStatus.UNAVAILABLE_CONNECTION)
 
-            // Update onSendHelpRequest status
             is MainScreenAction.OnSendHelpRequest -> state.copy(onSendHelpRequest = !state.onSendHelpRequest)
 
-            // Dispatch Action to send help and update onSendHelpRequest status
             is MainScreenAction.SendHelp -> state.copy(onSendHelpRequest = false)
 
-            // Update Problem status
             is MainScreenAction.UpdateProblem -> state.copy(problem = action.problem)
         }
 
@@ -78,67 +69,31 @@ class MainScreenReducer : Reducer<MainScreenUiState, MainScreenAction> {
  */
 sealed interface MainScreenAction {
 
-    /**
-     * Action triggered when user information changes.
-     *
-     * @param userPreferenceModel The updated user preference model.
-     */
     data class OnUserInfoChange(
         val userPreferenceModel: HardUserPreferenceModel
     ) : MainScreenAction
 
-    /**
-     * Action triggered when the send help button is pressed.
-     *
-     * @param sendHelp The status of the send help action (true/false).
-     * @param topStatus The current snackbar status.
-     */
     data class OnSendHelp(
         val sendHelp: Boolean,
         val topStatus: SnackBarTopStatus
     ) : MainScreenAction
 
-    /**
-     * Action triggered when there's an error in sending help.
-     *
-     * @param throwable The exception that occurred during the process.
-     */
     data class OnErrorInSendHelp(
         val throwable: Throwable
     ) : MainScreenAction
 
-    /**
-     * Action triggered when the internet connection status changes.
-     *
-     * @param status The current internet connection status.
-     */
     data class OnInternetStatus(
         val status: InternetStatus
     ) : MainScreenAction
 
-    /**
-     * Action triggered when there is no internet connection.
-     */
     data object OnNoInternetConnection : MainScreenAction
 
-    /**
-     * Action triggered when the user location needs to be updated.
-     */
     data object OnUserLocation : MainScreenAction
 
-    /**
-     * Action triggered to send help.
-     */
     data object SendHelp : MainScreenAction
 
-    /**
-     * Action triggered to request Help
-     */
     data object OnSendHelpRequest : MainScreenAction
 
-    /**
-     * Action triggered to update problem
-     */
     data class UpdateProblem(
         val problem: String
     ) : MainScreenAction

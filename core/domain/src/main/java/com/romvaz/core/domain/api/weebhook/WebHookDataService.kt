@@ -9,9 +9,9 @@ import com.romvaz.core.domain.models.api.response.WebHookResponseModel
 // `Result` wrapper to handle success and failure states.
 interface WebHookDataService {
 
-    // Sends help data using the provided `SendHelpPostModel`.
+    // Sends help POST using the provided `SendHelpPostModel`.
     suspend fun sendHelp(sendHelpPostModel: SendHelpPostModel): Result<WebHookResponseModel>
 
-    // Sends location data using the provided `SendLocationPostModel`.
+    // Sends location POST using the provided `SendLocationPostModel`.
     suspend fun sendLocation(sendLocationPostModel: SendLocationPostModel): Result<WebHookResponseModel>
 }
