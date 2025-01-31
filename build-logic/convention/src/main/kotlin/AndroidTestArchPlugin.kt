@@ -26,9 +26,16 @@ class AndroidTestArchPlugin : Plugin<Project> {
                 testImplementation(libs.library("mockito-core"))
                 // Add Mockito inline for mocking final classes and methods in unit tests
                 testImplementation(libs.library("mockito-inline"))
+                // Add Mockito kotlin
+                testImplementation(libs.library("mockito-kotlin"))
+                // Add Mockito io
+                testImplementation(libs.library("mockito-io"))
 
                 // Add Kotlin Coroutines test library to test suspend functions and coroutines
                 testImplementation(libs.library("kotlinx-coroutines-test"))
+
+                // Add JUnit
+                implementation(libs.library("androidx-junit-ktx"))
 
                 // Add AndroidX test libraries for instrumentation testing (UI tests, etc.)
                 androidTestImplementation(libs.bundle("androidx-test"))

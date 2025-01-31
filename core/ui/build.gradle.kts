@@ -1,6 +1,7 @@
 plugins {
     id("arch.android.library")
     id("arch.android.library.compose")
+    id("arch.android.test")
 }
 
 android {
