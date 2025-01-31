@@ -8,9 +8,10 @@ updates, following the latest best practices in Android development.
 In order to run the project:
 
 1. Clone the project into your computer
-2. Set the gradle JDK to JAVA 17
-3. Sync project gradle files. The minimum current supported version is: 2024.1.1 Patch 1 - Koala
-4. Run the app module on master
+2. Copy the  [Google API KEY](https://docs.google.com/document/d/1VVpjGI7ILzvw2DEmCcx66Br0MM3xxDOz/edit?usp=sharing&ouid=109986073085171052452&rtpof=true&sd=true) inside app Manifest
+3. Set the gradle JDK to JAVA 17
+4. Sync project gradle files. The minimum current supported version is: 2024.1.1 Patch 1 - Koala
+5. Run the app module on master
 
 # Quality and excellence in code
 
