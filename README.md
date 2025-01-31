@@ -111,3 +111,78 @@ It includes two buttons: one for the profile and one for alerts.
 
 This flow will display the user's information and will only include the option to return to the maps
 screen.
+
+# Unit and Implementation Tests of the Application
+
+## Description
+
+A series of unit tests have been implemented to validate the behavior of various classes and
+functionalities within the application. These tests ensure that key components function correctly
+under different scenarios and that the application logic is robust against potential errors.
+
+### Tested CLasses
+
+#### Input Validation (Emails and Passwords)
+
+1. ValidateMail: The email validation method was tested to ensure it works correctly. The test
+   checks that a valid email passes validation and an invalid email fails.
+2. ValidatePassword: The password validation method was tested to verify that valid and invalid
+   passwords are handled correctly.
+
+#### Store State Management
+
+Tests were implemented to ensure that the Store correctly handles actions and updates the state as
+expected. The tests include:
+
+1. Dispatch: Verifies that the dispatch action correctly updates the store’s state.
+2. Multiple actions: Ensures that the store handles multiple actions and accumulates state changes
+   correctly.
+
+#### HTTP Headers Interceptors
+
+1. HeadersInterceptor: It was tested to ensure that the interceptor adds the "accept" header to the
+   HTTP request correctly. The test validates that the request passed to the chain contains the
+   expected header.
+
+#### WebHook API Integration
+
+Tests were written to verify proper integration with the WebHook API:
+
+1. SendHelp: It checks that the API returns the expected response on success and correctly handles
+   errors when the response is an error (e.g., 400).
+2. SendLocation: Similarly, the location sending service was tested to ensure it works correctly in
+   both success and failure scenarios.
+3. Additionally, auxiliary methods such as safeCall and asApiResponse were tested to ensure correct
+   API response management.
+
+#### User Preferences Management
+
+UserPreferencesImplementation: Tests ensure that the user preferences implementation properly
+interacts with DataStore:
+
+1. GetPreferences: Ensures that data stored in DataStore is retrieved correctly.
+2. UpdateUserInfo: Verifies that user preferences are correctly updated in DataStore.
+   
+#### Permission Management
+
+PermissionImplementation: The permission management functionality was tested, particularly related
+to location permissions:
+
+1. LocationPermissionFlow: Verifies that the location permission flow works based on the current
+permission state (granted or denied).
+2. UpdateLocationPermissionState: Tests that the permission state is updated correctly.
+
+#### Internet Connection Status
+
+InternetStatusService: The internet connection status service was validated to ensure it accurately
+determines internet connectivity:
+
+1. TheresInternet: Verifies that the service returns true when the internet is available and false when
+it is not.
+
+### Conclusion
+
+The unit tests cover a wide range of functionalities within the application, from user input
+validation to API interactions, permission management, and internet connectivity checks. Running
+these tests ensures that key components of the application behave correctly in different scenarios,
+contributing to a more reliable and robust user experience.
